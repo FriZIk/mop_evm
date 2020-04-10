@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "random": "c",
+        "stdio.h": "c",
+        "array": "c",
+        "hash_map": "c",
+        "deque": "c",
+        "list": "c",
+        "string": "c",
+        "vector": "c",
+        "iterator": "c",
+        "string_view": "c",
+        "tuple": "c",
+        "chrono": "c",
+        "algorithm": "c",
+        "TaskB_NesterenkoPA.C": "cpp"
+    }
+}

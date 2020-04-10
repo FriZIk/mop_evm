@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "random": "c",
+        "stdio.h": "c",
+        "ctype.h": "c",
+        "TaksB_NesterenkoPA.C": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp"
+    }
+}
