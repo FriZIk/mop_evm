@@ -14,6 +14,7 @@ typedef struct List List;
 
 void InitList(List **Head) // Инициализация пустого списка
 {   
+    
     (*Head) = (List*)malloc(sizeof(List));
     (*Head)->Data = NULL;
     (*Head)->next = (*Head); // указатель на следующий узел
@@ -114,47 +115,62 @@ void DeleteList(List *Head) // Уничтожение списка с освоб
 
 void AddElementConst(List *Head,int var,int Count) // Добавить новый узел перед узлом с заданным значением данных
 {
-    int triger = 0;
-    List *Temp = (List*)malloc(sizeof(List));
-    Temp = Head;
-    while(Temp->Data != var && triger < Count)
+    if(Count == 0)
     {
-        Temp = Temp->next;
-        triger++;
-    }
-    if(triger == Count) 
-    {
-        printf("Узла с таким значением не существует!\n");
+        printf("Список пуст, добавление невозможно!\n");
         return;
     }
     else
     {
-        printf("Введите новое значение:");
-        scanf("%d",&var);
-        List *New = (List*)malloc(sizeof(List));
-    
-        Temp->prev->next = New;
-        New->prev = Temp->prev;
-        New->next = Temp;
-        Temp->prev = New;
-        New->Data = var;
+        int triger = 0;
+        List *Temp = (List*)malloc(sizeof(List));
+        Temp = Head;
+        while(Temp->Data != var && triger < Count)
+        {
+            Temp = Temp->next;
+            triger++;
+        }
+        if(triger == Count) 
+        {
+            printf("Узла с таким значением не существует!\n");
+            return;
+        }
+        else
+        {
+            printf("Введите новое значение:");
+            scanf("%d",&var);
+            List *New = (List*)malloc(sizeof(List));
+        
+            Temp->prev->next = New;
+            New->prev = Temp->prev;
+            New->next = Temp;
+            Temp->prev = New;
+            New->Data = var;
+        }   
     }
 }
 
-void DeleteElementNumber(List *Head,int Index,int Count) // Удалить узел с указанным порядковым номером
-{
-    if(Count == 1)free(Head);
+void DeleteElementNumber(List *Head,int Index) // Удалить узел с указанным порядковым номером
+{ 
+    List *Temp = (List*)malloc(sizeof(List));
+
+    if(Index == 1)
+    {
+        Temp = Head->next;
+        Head->Data = Temp->Data;
+        Head->next = Temp->next;
+        Head->next->next->prev = Head;
+        free(Temp);
+    }
     else
     {
-        List *Temp = (List*)malloc(sizeof(List));
-        Temp = Head;
-    
-        for(int i = 1;i < Index;i++)
-            Temp = Temp->next;
+        Temp = Head->next;
+        for(int i = 2;i < Index;i++)
+        Temp = Temp->next;
 
         Temp->prev->next = Temp->next;
         Temp->next->prev = Temp->prev;
-        free(Temp);
+        free(Temp);   
     }
 }
 
@@ -163,7 +179,7 @@ int main()
     setlocale(LC_ALL,"Russian");
     typedef struct List List;
     int Command = -1;
-    List *Head = (List*)malloc(sizeof(List)); //Указатель на последний активный элемент или просто голова списка
+    List *Head;//Указатель на последний активный элемент или просто голова списка
     int var,Count = 0; 
 
     printf("Доступные команды:\n1) Инициализация пустого списка\n2) Уничтожение списка с освобождением памяти\n3) Добавление узла в голову списка\n4) Добавление узла в хвост списка\n5) Удаление узла из головы списка\n6) Удаление узла из хвоста списка\n7) Выдача текущего списка на экран\n8) Добавить новый узел перед узлом с заданным значением данных\n9) Удалить узел с указанным порядковым номером\n0) Завершение работы программы\n");
@@ -178,12 +194,17 @@ int main()
             case 1:                                                   // Инициализация пустого списка
                InitList(&Head);
                printf("Список инициализирован!\n");
+               Count = 0;
             break;
             case 2:                                                   // Уничтожение списка с освобождением памяти
-               DeleteList(Head);
-               printf("Список удалён!\n");
-               Count = 0;
-               free(Head);
+               if(Count != 0)
+               {
+                    DeleteList(Head);
+                    printf("Список удалён!\n");
+                    Count = 0;
+                    free(Head);
+               }
+               else printf("Список уже пуст!\n");
             break;
             case 3:                                                   // Добавление узла в голову списка
                 printf("Введите новое значение:");
@@ -198,17 +219,31 @@ int main()
                 Count++;
             break;   
             case 5:                                                   // Удаление узла из хвоста списка 
-                DeleteElementTail(Head,Count);
-                if(Count != 0)Count--;
-                if(Count == 0)InitList(&Head);
+                if(Count != 0)
+                {
+                    DeleteElementTail(Head,Count);
+                    Count--;
+                }
+                if(Count == 0)
+                {
+                    printf("Список пуст, пожалуйста проинициализируйте список и добавьте в него элементы\n");
+                    //InitList(&Head);
+                }
             break;   
             case 6:                                                   // Удаление узла из головы списка 
-                DeleteElementHead(Head,Count);
-                if(Count != 0)Count--;
-                if(Count == 0)InitList(&Head);
+                if(Count != 0)
+                {
+                    DeleteElementHead(Head,Count);
+                    Count--;
+                }
+                if(Count == 0)
+                {
+                    printf("Список пуст, пожалуйста проинициализируйте список и добавьте в него элементы\n");
+                    //InitList(&Head);
+                }
             break;          
             case 7:                                                   // Выдача текущего списка на экран
-                if(Head->next != Head || Count > 0)
+                if(Count > 0)
                 {
                     printf("Текущее содержимоее списка:");
                     PrintList(Head,Count);
@@ -219,12 +254,22 @@ int main()
                 printf("Введите значение для поиска:");
                 scanf("%d",&var);
                 AddElementConst(Head,var,Count);
+                Count++;
             break;
             case 9:                                                   // Удалить узел с указанным порядковым номером
-                printf("Введите номер элемента для удаления:");
-                scanf("%d",&var);
                 if(Count != 0)
-                    DeleteElementNumber(Head,var,Count);
+                {
+                    printf("Введите номер элемента для удаления:");
+                    scanf("%d",&var);
+                    if(var <= Count)
+                    {
+                        DeleteElementNumber(Head,var);
+                        Count--;
+                    }
+                    else printf("Вам тесно в этом списке? Слишком большой номер элемента!\n");
+                }
+                else printf("Список пуст!!!\n");
+                
             break;                                           
             default : printf("Неизвестная команда!\n");break;
         }
