@@ -97,9 +97,21 @@ Tree* EnterTreeELement(Tree *root, int var,Tree *prev) // Ввода элеме�
     return root;
 }
 
-int ReplacementRec(Tree *root,int sum) 
+int foo(Tree *root)
 {
-    
+	if (root == NULL)
+	{
+		return 0;
+	}
+	else if ((root->left == NULL)&& (root->right == NULL))
+	{
+		return root->data;
+	}
+	else 
+	{
+		root->data = foo(root->left) + foo(root->right);
+		return root->data;
+	}
 }
 
 int main()
@@ -142,7 +154,7 @@ int main()
             case 4:/*is comming*/break;
             case 5:                                                             // Заменить значения каждой внутренней вершины суммой значений всех потомков
                 printf("Все значения были заменяны на суммы значений их потомков");
-                ReplacementRec(root);
+                //ReplacementRec(root);
             break;
             default:printf("Неизвестная команда, повторите попытку!\n");break;
         }
