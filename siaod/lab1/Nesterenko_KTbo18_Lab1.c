@@ -11,7 +11,7 @@ struct List
     struct List *prev;
 };
 typedef struct List List;
-
+ы
 void InitList(List **Head) // Инициализация пустого списка
 {   
     

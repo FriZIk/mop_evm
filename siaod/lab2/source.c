@@ -129,3 +129,33 @@ int main()
     
     return 0;
 }
+
+/*
+void PrintTreeNoRec(Tree *root) // Вывод содержимого дерева через цикл
+{
+    printf("%d ",root->data);
+    int TrigerToStop = 0;
+    do
+    {
+        if(root->parent == NULL && (root->left == NULL && root->right->triger == 1 || root->right == NULL && root->left->triger == 1) || (root->parent == NULL && root->left->triger == 1 && root->right->triger == 1))
+            TrigerToStop = 1;
+        else
+        {
+            if(root->left != NULL && root->left->triger == 0)
+            {
+                root = root->left;
+                printf("%d ",root->data);
+                root->triger = 1;
+            }
+            else if(root->right != NULL && root->right->triger == 0)
+            {
+                root = root->right;
+                printf("%d ",root->data);
+                root->triger = 1;
+            }
+            else root = root->parent;
+        }
+    }while(TrigerToStop == 0);
+    //ClearTrigers(root);
+}
+*/
