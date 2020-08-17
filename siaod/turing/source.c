@@ -31,7 +31,7 @@ Command** GetCommands(int *CntOfLines,int *CntOfColums)
     fscanf(CommandsFile,"%d %d",&CountOfLines,&CountOfColums);
     
     Command **cmd = (Command**)malloc(sizeof(Command*) * CountOfLines);
-    for(int i =0;i < CountOfLines;i++)
+    for(int i = 0;i < CountOfLines;i++)
         cmd[i] = (Command*)malloc(sizeof(Command) * CountOfColums);
     
     for(int i = 0;i < CountOfLines;i++)

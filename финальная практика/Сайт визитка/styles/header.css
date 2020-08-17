@@ -1,0 +1,97 @@
+#Info
+{
+  background-image: url('../images/background.jpg'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  margin:0;
+}
+
+.TopBar
+{
+  margin: 0;
+  background-color:#19191A;
+  border-radius:0;
+  margin:0;
+  border-radius: 0;
+}
+
+#aboutme
+{
+  margin : 0;
+  text-align: center;
+  background-color:#222123;
+}
+
+#Contact
+{
+  background-color:#101010;
+  width: 100%;
+  width: 100%;
+  position:relative"
+}
+
+html 
+{
+   overflow-x: hidden;
+}
+
+
+/* Блок для появления корусели */
+.home-demo .item {
+  background: #19191A;
+  flex: 1 1 100px;
+  padding: 10px;
+}
+.home-demo h2 {
+  color: #19191A;
+  text-align: center;
+  padding: 5rem 0;
+  margin: 0;
+  font-style: italic;
+  font-weight: 300;
+}
+.home-slider {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media (min-width: 601px) {
+  .home-demo .item {
+    margin: 5px;
+  }
+}
+
+/* .owl-prev{
+  background-image: url("<i class='fa fa-chevron-left'></i>");
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+}
+.owl-next{
+  background-image: url("<i class='fa fa-chevron-right'></i>");
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+} */
+
+/* Для кнопки вверх*/
+div.scrollup {
+  position: fixed;
+  color: #fff; 
+  background-color: #286090; 
+  right: 20px;
+  bottom: 20px; 
+  padding: 4px 10px; 
+  font-size: 50px; 
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  cursor: pointer; 
+  display: none; 
+  text-align: center; 
+  z-index: 99999;
+  background-color: #222123;
+}
+div.scrollup:hover {
+  background-color: #000; 
+}

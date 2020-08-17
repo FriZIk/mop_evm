@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="styles/header.css">
+        <link rel="scripts" href="scripts/scrollup.js">
+
+        <!-- Scrollup надо бы сделать-->
+        <script src="scripts/PageUp.js" type="text/javascript"></script>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="libs/font-awesome-4.7.0/css/font-awesome.min.css">
+        
+
+        <!-- Совиная корусель -->
+        <link rel="stylesheet" href="libs/owlcarousel/assets/owl.carousel.min.css"/>
+        <link rel="stylesheet" href="libs/owlcarousel/assets/owl.theme.default.css"/>
+        <script src="libs/owlcarousel/owl.carousel.min.js"></script>
+        <script src="scripts/Owl_Init.js" type="text/javascript"></script>
+
+
+        <!-- Для появления эелментов при прокрутке (не работает)-->
+        <link rel="stylesheet" href="libs/aos-master/dist/aos.css">
+        <script src="libs/aos-master/dist/aos.js" type="text/javascript"></script>
+        <script src="scripts/Init_AOS.js" type="text/javascript"></script>
+
+
+        <!-- Плавный переход между якорными ссылками -->
+        <script src="scripts/plavniy.js" type="text/javascript"></script>
+
+
+        <!-- Заголовое и иконка сайта -->
+        <title>Персональный сайт Нестеренко Пётра</title>
+        <link rel="shortcut icon" href="images/processor.ico" type="image/x-icon">
+
+      </head>
+    <!-- <body class="container"> -->
+    <body>
+      <!-- Верхний тулбар -->
+      <header>
+      <div id="TopBar">
+        <nav class ="navbar navbar-inverse" style="margin: 0;border-radius:0">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Персональный сайт Нестеренко Петра</a>
+            </div>
+            <nav id="menu">
+              <ul class="nav navbar-nav navbar-right">
+            
+                <!-- <li class="active"><a href="#TopBar">Главная</a></li> -->
+                <li><a href="#aboutme">Обо мне</a></li>
+                <li><a href="#Portfolio">Портфолио</a></li>
+                <li><a href="#Contact">Контакты</a></li>
+              </ul>
+            </nav>
+            </div>
+        </nav>
+     </div>
+    </header>
+
+      <!-- Моя фотография и общая информация -->
+      <div id="Info" class="jumbotron jumbotron-fluid row" style="color:#FFFFFF">
+              <div class="col-md-2"></div>
+
+              <div class="col-md-3" style="margin:0">
+                <img src="images/iam.png" class="img-responsive" style="margin: 0;position: relative;height:550px;width:420px">
+              </div>
+  
+              <div class="col-md-6" style="margin-top: 100px;background-color: #222123;text-align: center;margin-bottom: 0 auto;">
+                <h1 class="display-4" >Приветствую вас на своём сайте</h1>
+                <p style="text-align:center"> Изучаю программрование и IT уже 5 лет, интересуюсь разработкой  встраиваемых систем и машинным обучением. Сейчас обучаюсь на кафедре математического обеспечения и применения ЭВМ, ИКТИБ ЮФУ(бывший ТРТУ/ТРТИ). Люблю решать сложные задачи и учиться новому.</p>
+              </div>
+        </div>
+
+      <!-- Блок обо мне -->
+      <div id="aboutme" class="container-fluid">
+        <div class="row">
+          <h2 style="color:#FFFFFF">Область моих инетересов</h2>
+          <p class="lead" style="color:#FFFFFF">Чем я занимаюсь</p>
+          <div class="col-md-4" style="color:#FFFFFF">
+            <img src="images/ram.png" width=250 height=250>
+            <h3>Создание электронных устройств</h3>
+            <p>Разработка прототипов устройств на базе микроконтроллеров STM32, esp8266 и тд. Написание прошивок на языках C/C++.</p>
+          </div>
+          <div class="col-md-4" style="color:#FFFFFF">
+            <img src="images/processor.png" width=250 height=250>
+            <h3>Проектирование микросхем и печатных плат</h3>
+            <p>Разводка печатных плат в программа SprintLayout. Создание конфигураций для ПЛИС на языке VHDL. Создание принципиальных схем устройств в Fritzing</p>
+          </div>
+          <div class="col-md-4" style="color:#FFFFFF">
+            <img src="images/computing.png" width=250 height=250>
+            <h3>Разработка решений машинного зрения</h3>
+            <p>Создание моделей нейронных сетей на языке Python с использованием библиотек Tensorflow, Keras, PyTorch, matplotlib и pandas </p>
+          </div>
+        </div>
+      </div>
+
+      
+      <!-- Блок порфтолио -->
+      <div id="Portfolio">
+      <div class="home-demo" style="background-color:#0C0A13;margin: 0;">
+        <h2 style="color:#FFFFFF;text-align: center">Портфолио проектов</h2>
+        <div class="owl-carousel home-slider owl-theme" style="text-align:center;color:#FFFFFF">
+          <div class="item">
+            <h3>Победа в хакатоне CyberGarden2019</h3>
+            <img src="images/hack.jpg" alt="Chania">
+            <p style="padding:10px">Мы с командой одержали победу с приложением: «Мобильный гербарий». Суть нашего приложения заключаться в сборе гербария посредством фото, получения за это баллов, а также обмене фото с другими пользователями. С помощью нейронных сетей пользователь может, сделав снимок, узнать, лист какого дереве перед ним. Это даёт возможность использовать наше приложение для обучения</p>
+          </div>
+          <div class="item">
+            <h3>Разработка аппаратной реализации скростоной системы шифрования</h3>
+            <img class="img-fluid" src="images/fpga.png" alt="Chicago">
+            <p style="padding:10px">Проект будет реализован с использованием ПЛИС на основе семейства Artix, обеспечивающих достаточно ресурсов для разработки при низкой потребляемой мощности и удовлетворительном быстродействии для поставленной задачи.  Аппаратная реализация криптоалгоритмов позволяет во много раз быстрее, по сравнению с программными аналогами, проводить расчёты и распараллеливать многочисленные однотипные задачи, что так же увеличивает скорость вычислений. </p>
+          </div>
+          <div class="item">
+            <h3>Победа в хакатоне ХакниCOVID-19, проводимым администрацией Ростовской области</h3>
+            <img class="img-fluid" src="images/cv.jpg" alt="Chicago">
+            <p style="padding:10px">Наше "Приложение дополненной реальности для парковых зон с информационным насыщением" заняло первое место. Многие из нас при посещении музеев, парков и иных памятников культуры обращают внимание на информационные таблицы, рассказывающие об истории этого объекта. Приложение первокурсников добавляет в процесс чтения интерактивные элементы, что даёт возможность рассмотреть с разных сторон 3D модель предмета на своём смартфоне, прочитать информацию на виртуальных информационных досках, не ограничиваясь информацией, изложенной на одной реальной таблице.</p>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Кнопка наверх -->
+    <div class="scrollup">
+      <i class="fa fa-chevron-up"></i>
+    </div>
+
+      <!-- Контакты -->
+      <footer>
+      <div id="Contact">
+      <div class="container-fluid">
+        <div class="row" style="margin-bottom: auto;color:#FFFFFF">
+          <div class="col-md-3" style="padding:20px">
+            <p>Контактная информация г.Таганрог, пер. Каркасный, д 9.</p>
+            <p>тел. +7 (918) 850-47-22</p>
+            <p>Электронная почта:pnesterenko@sfedu.ru</p>
+          </div>
+          <div class="col-md-6" class="text-align" style="padding:40px;text-align: center;">
+            <p>© Copyright Нестеренко Пётр, 2020. Копирование материалов сайта запрещено без моего согласия</p>
+          </div>
+          <div class="col-md-1 navbar-right" style="text-align:center;margin-top: 20px"> 
+            <p><a href="https://www.youtube.com/channel/UC8cAOIOgP0ZJDOWGMQ6PABA?view_as=subscriber">
+              <img class="img-fluid" src="images/youtube.png" class="img-fluid" alt="Responsive image" style="height:64px;width:64px;margin:15px">
+            </a></p>
+          </div>
+          <div class="col-md-1 navbar-right" style="text-align:center;margin-top: 20px"> 
+            <p><a href="https://vk.com/petr_nesterenko">
+              <img class="img-fluid" src="images/vk.png" class="img-fluid" alt="Responsive image" style="height:64px;width:64px;margin:15px">
+            </a></p>
+          </div>
+          <div class="col-md-1 navbar-right" style="text-align:center;margin-top: 20px">
+            <p><a href="https://github.com/FriZIk">
+              <img class="img-fluid" src="images/github.png" class="img-fluid" alt="Responsive image" style="height:64px;width:64px;margin:15px">
+            </a></p>
+          </div>
+          
+          <div class="clearfix visible-lg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</html>
