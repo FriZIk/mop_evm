@@ -1,0 +1,81 @@
+Turbo Assembler	 Version 3.1	    10/29/20 19:02:07	    Page 1
+lab2.asm
+
+
+
+      1	0000			     model SMALL
+      2	0000			     stack 100h
+      3
+      4	0000			     dataseg
+      5	0000  ????		     MAX dw ?
+      6	0002  0001 0002	0003 0005 +  MASS dw 1h,2h,3h,5h,4h,5,6h,7h,8h,9h
+      7	      0004 0005	0006 0007 +
+      8	      0008 0009
+      9
+     10	0016			     codeseg
+     11				     startupcode
+1    12	0000			     @Startup:
+1    13	0000  BA 0000s			     MOV     DX,@data
+1    14	0003  8E DA			     MOV     DS,DX
+1    15	0005  8C D3			     MOV     BX,SS
+1    16	0007  2B DA			     SUB     BX,DX
+1    17	0009  D1 E3 D1 E3 D1 E3	D1+	     SHL     BX,4
+     18	      E3
+1    19	0011  FA			     CLI
+1    20	0012  8E D2			     MOV     SS,DX
+1    21	0014  03 E3			     ADD     SP,BX
+1    22	0016  FB			     STI
+     23	0017  BB 0002r		     lea BX, MASS ; Загрузить адрес массива
+     24	001A  B9 000A		     mov CX, 10	; Установить счетчик
+     25	001D  8B 07		     mov AX, [BX] ; Первый элемент	массива в аккумулятор
+     26	001F  39 07		     BEG: cmp [BX], AX ; Сравнить текущий элемент	массива с
+     27					 ; максимумом
+     28	0021  7C 02			 jl NO ; он меньше
+     29	0023  8B 07			 mov AX, [BX] ;	он больше
+     30	0025  83 C3 02			 NO: add BX, 2 ; Следующий элемент массива
+     31	0028  E2 F5		     loop BEG ;	Возврат,	если счетчик	CX не	пуст
+     32
+     33	002A  A3 0000r		     mov MAX, AX
+     34
+     35	002D			     QUIT: exitcode 0
+1    36	002D  B8 4C00			     MOV     AX,04C00h
+1    37	0030  CD 21			     INT     21h
+     38				     end
+Turbo Assembler	 Version 3.1	    10/29/20 19:02:07	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "10/29/20"
+??FILENAME			  Text	 "lab2	  "
+??TIME				  Text	 "19:02:07"
+??VERSION			  Number 030A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB2
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 _TEXT:0000
+@WORDSIZE			  Text	 2
+BEG				  Near	 _TEXT:001F
+MASS				  Word	 DGROUP:0002
+MAX				  Word	 DGROUP:0000
+NO				  Near	 _TEXT:0025
+QUIT				  Near	 _TEXT:002D
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  0016 Word	  Public  DATA
+_TEXT				  16  0032 Word	  Public  CODE
+

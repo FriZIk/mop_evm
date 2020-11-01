@@ -1,0 +1,86 @@
+Turbo Assembler	 Version 3.1	    10/30/20 16:08:04	    Page 1
+lab2(2).asm
+
+
+
+      1				     ; Вариант 14
+      2				     ; Найти сумму отрицательных	чисел. Массив слов.
+      3
+      4	0000			     model SMALL
+      5	0000			     stack 100h
+      6
+      7	0000			     dataseg
+      8	0000  ????		     sum dw ?;
+      9	0002  0001 FFFE	0003 0004 +  arr dw 1h,-2h,3h,4h,-5h,6h,7h,8h,9h,10h
+     10	      FFFB 0006	0007 0008 +
+     11	      0009 0010
+     12
+     13
+     14	0016			     codeseg
+     15				     startupcode
+1    16	0000			     @Startup:
+1    17	0000  BA 0000s			     MOV     DX,@data
+1    18	0003  8E DA			     MOV     DS,DX
+1    19	0005  8C D3			     MOV     BX,SS
+1    20	0007  2B DA			     SUB     BX,DX
+1    21	0009  D1 E3 D1 E3 D1 E3	D1+	     SHL     BX,4
+     22	      E3
+1    23	0011  FA			     CLI
+1    24	0012  8E D2			     MOV     SS,DX
+1    25	0014  03 E3			     ADD     SP,BX
+1    26	0016  FB			     STI
+     27	0017  BB 0002r		     lea BX, arr
+     28	001A  B9 000A		     mov CX, 10	; dlina	masiva
+     29	001D  33 C0		     xor AX, AX	; nul
+     30	001F  33 D2		     xor DX, DX	;
+     31
+     32	0021  39 07		     BEG: cmp [BX],AX
+     33	0023  79 02			 jns NO
+     34	0025  03 17			 add DX,[BX] ;esli -
+     35	0027  83 C3 02			 NO: add BX,2 ;	esli +
+     36	002A  E2 F5		     loop BEG
+     37
+     38	002C  89 16 0000r	     mov sum,DX	;v dop code
+     39
+     40	0030			     QUIT: exitcode 0
+1    41	0030  B8 4C00			     MOV     AX,04C00h
+1    42	0033  CD 21			     INT     21h
+     43				     end
+Turbo Assembler	 Version 3.1	    10/30/20 16:08:04	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "10/30/20"
+??FILENAME			  Text	 "lab2(2) "
+??TIME				  Text	 "16:08:04"
+??VERSION			  Number 030A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB2(2)
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 _TEXT:0000
+@WORDSIZE			  Text	 2
+ARR				  Word	 DGROUP:0002
+BEG				  Near	 _TEXT:0021
+NO				  Near	 _TEXT:0027
+QUIT				  Near	 _TEXT:0030
+SUM				  Word	 DGROUP:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  0016 Word	  Public  DATA
+_TEXT				  16  0035 Word	  Public  CODE
+
