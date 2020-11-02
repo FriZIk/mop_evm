@@ -3,7 +3,7 @@ stack 100h
 
 dataseg
 MAX dw ?
-MASS dw 1h,2h,3h,5h,4h,5,6h,7h,8h,9h
+MASS dw 1b,2h,3h,5h,4h,5,6h,7h,8h,9h
 
 codeseg
 startupcode
