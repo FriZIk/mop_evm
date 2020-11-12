@@ -7,8 +7,6 @@
 # При вводе пустой строки завершать выполнение.
 
 #!/bin/bash
-#$1 - имя папки $2 - строка для поиска
-#echo -n Введите строку для поиска: 
 DirName=$1
 String=$2
 
@@ -35,9 +33,3 @@ else
         done 
     fi
 fi
-
-
-
-# read varname
- 
-# echo It\'s nice to meet you $varname
