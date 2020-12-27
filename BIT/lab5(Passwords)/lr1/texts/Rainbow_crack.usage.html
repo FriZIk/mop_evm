@@ -1,0 +1,575 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080926;2074994">
+	<META NAME="CHANGED" CONTENT="20080928;19394542">
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>3.3.
+Порядок работы с Rainbow_crack</B></FONT></FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Допустим, мы
+скопировали (установили) Rainbowcrack в каталог &laquo;cd
+c:\rainbowcrack-1.2-win&raquo;. После этого запускаем консоль Windows
+(команда cmd) и осуществляем переход в данный каталог используя
+команды &laquo;</FONT></FONT><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>cd
+..</B></FONT></FONT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>&raquo;
+и &laquo;</FONT></FONT><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>cd
+c:\rainbowcrack-1.2-win</B></FONT></FONT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>&raquo;.
+</FONT></FONT>
+</P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Далее, мы можем
+воспользоваться командами данного программного продукта.</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Для начала
+необходимо подготовить радужные таблицы (rainbow table). Для этого
+служит команда &laquo;<B>rtgen.exe</B>&raquo;. Вводим её в командной
+строке и нажимаем &laquo;<B>Enter</B>&raquo;. В этом случае на экран
+будет выведено следующее сообщение, подсказывающее, как пользоваться
+командой:</FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#2300dc" CELLPADDING=5 CELLSPACING=4>
+	<COL WIDTH=256*>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;rtgen</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">RainbowCrack
+			1.2 - Making a Faster Cryptanalytic Time-Memory Trade-Off</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">by
+			Zhu Shuanglei &lt;shuanglei@hotmail.com&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">http://www.antsight.com/zsl/rainbowcrack/</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">usage:
+			rtgen hash_algorithm \</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain_charset
+			plain_len_min plain_len_max \</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rainbow_table_index
+			\</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rainbow_chain_length
+			rainbow_chain_count \</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">file_title_suffix</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rtgen
+			hash_algorithm \</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain_charset
+			plain_len_min plain_len_max \</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rainbow_table_index
+			\</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">-bench</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">hash_algorithm:
+			available: lm md5 sha1</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain_charset:
+			use any charset name in charset.txt here</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">use
+			&quot;byte&quot; to specify all 256 characters as the charset of
+			the plaintext</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain_len_min:
+			min length of the plaintext</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain_len_max:
+			max length of the plaintext</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rainbow_table_index:
+			index of the rainbow table</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rainbow_chain_length:
+			length of the rainbow chain</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rainbow_chain_count:
+			count of the rainbow chain to generate</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">file_title_suffix:
+			the string appended to the file title</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">add
+			your comment of the generated rainbow table here</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">-bench:
+			do some benchmark</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">example:
+			rtgen lm alpha 1 7 0 100 16 test</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rtgen
+			md5 byte 4 4 0 100 16 test</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rtgen
+			sha1 numeric 1 10 0 100 16 test</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rtgen
+			lm alpha 1 7 0 -bench</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Допустим,
+нам требуется создать радужную таблицу для хэш-функции SHA1, при этом
+удовлетворяющую условиям: </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>1)
+восстанавливаемые пароли содержат только маленькие латинские буквы и
+цифры;</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>2)
+длина восстанавливаемых паролей от 1-го до 6-и символов;</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>3)
+название таблицы &mdash; laba.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Для
+определения того, как указать используемый набор символов, просмотрим
+содержимое файла &laquo;charset.txt&raquo;:</FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#2300dc" CELLPADDING=5 CELLSPACING=4>
+	<COL WIDTH=256*>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">#
+			charset configuration file for rainbowcrack 1.1 and later</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace"># by
+			Zhu Shuanglei &lt;shuanglei@hotmail.com&gt;</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">alpha
+			= [ABCDEFGHIJKLMNOPQRSTUVWXYZ]</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">alpha-numeric
+			= [ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">alpha-numeric-symbol14
+			= [ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&amp;*()-_+=]</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">all =
+			[ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&amp;*()-_+=~`[]{}|\:;&quot;'&lt;&gt;,.?/]</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">numeric
+			= [0123456789]</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">loweralpha
+			= [abcdefghijklmnopqrstuvwxyz]</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">loweralpha-numeric
+			= [abcdefghijklmnopqrstuvwxyz0123456789]</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">lowerrus-numeric
+			= [ёйцукенгшщзхъфывапролджэячсмитьбю0123456789]</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Как
+видно из содержимого данного файла, необходимый нам набор символов
+называется &laquo;loweralpha-numeric&raquo;. В принципе, мы можем
+сами добавлять в этот файл различные наборы символов, например
+&laquo;lowerrus-numeric&raquo;.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Следующим
+важным шагом является определение размерности таблицы, которая
+зависит от объёма пространства входных сообщений. Данный объём легко
+вычислить, зная основание алфавита и количетсво используемых
+символов. Например, набор &laquo;loweralpha-numeric&raquo; содержит
+36 различных символов (т.е. основание равно 36). Для паролей длиной 1
+символ объём пространства составляет 36^1 или 36 различных
+комбинаций, для паролей длиной 2 символа объём пространства
+составляет 36^2 или 1296 различных комбинаций и т.д. Следовательно,
+общий объём пространства входных сообщений (паролей) составит:</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>36^1
++ 36^2 + 36^3 + 36^4 + 36^5 + 36^6 = 2.238.976.116 комбинаций.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Объём
+радужной таблицы задаётся двумя параметрами: длиной цепочки ключей и
+количеством этих цепочек в таблице. Если мы выберем длину цепочки
+равной 2400, а количество цепочек равным 1.000.000, то объём радужной
+таблицы составит 2.400.000.000 ключей (или вариантов перебора). Это
+значение превышает общий объём пространства входных сообщений, что
+нам и требуется. </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Используя
+определённые нами параметры запускаем процесс формирования радужной
+таблицы, используя команду &laquo;<FONT COLOR="#000000"><FONT FACE="Courier New, monospace"><FONT SIZE=3><B>rtgen.exe
+sha1 loweralpha-numeric 1 6 0 2400 1000000 laba</B></FONT></FONT></FONT>&raquo;:
+</FONT></FONT>
+</P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#2300dc" CELLPADDING=5 CELLSPACING=4>
+	<COL WIDTH=256*>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;rtgen.exe
+			sha1 loweralpha-numeric 1 6 0 2400 1000000 laba</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">hash
+			routine: sha1</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">hash
+			length: 20</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			charset: abcdefghijklmnopqrstuvwxyz0123456789</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			charset in hex: 61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70 71
+			72 73 7</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">4 75
+			76 77 78 79 7a 30 31 32 33 34 35 36 37 38 39</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			length range: 1 - 6</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			charset name: loweralpha-numeric</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			space total: 2238976116</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rainbow
+			table index: 0</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">reduce
+			offset: 0</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">generating...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">100000
+			of 1000000 rainbow chains generated (4 m 15 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">200000
+			of 1000000 rainbow chains generated (4 m 17 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">300000
+			of 1000000 rainbow chains generated (4 m 15 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">400000
+			of 1000000 rainbow chains generated (4 m 16 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">500000
+			of 1000000 rainbow chains generated (4 m 16 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">600000
+			of 1000000 rainbow chains generated (4 m 16 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">700000
+			of 1000000 rainbow chains generated (4 m 15 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">800000
+			of 1000000 rainbow chains generated (4 m 14 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">900000
+			of 1000000 rainbow chains generated (4 m 14 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">1000000
+			of 1000000 rainbow chains generated (4 m 15 s)</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Подождав
+более 50 мин. мы получим необходимый файл таблицы, имеющий название
+&laquo;<B>sha1_loweralpha-numeric#1-6_0_2400x1000000_laba.rt</B>&raquo;
+Так как в таблице сохраняются только значения начала и конца цепочек
+(по 8 байт), то она занимает на диске относительно небольшое место
+(16.000.000 байт).</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Для
+данной таблицы мы указали значение индекса равным &laquo;0&raquo;.
+Если мы хотим создать дополнительные таблицы (для увеличения
+вероятности успешного восстановления пароля), то каждой новой таблице
+указываем увеличенное на 1 значение индекса.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Следующей
+процедурой является сортировка таблицы при помощи команды
+&laquo;<B>rtsort.exe</B>&raquo;:</FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#2300dc" CELLPADDING=5 CELLSPACING=4>
+	<COL WIDTH=256*>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;rtsort
+			sha1_loweralpha-numeric#1-6_0_2400x1000000_laba.rt</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">available
+			physical memory: 2147483647 bytes</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">loading
+			rainbow table...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">sorting
+			rainbow table...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">writing
+			sorted rainbow table...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Создав
+полностью готовую радужную таблицу мы можем приступать к процессу
+восстановления паролей пользователей. Для этого подготовим текстовый
+файл, содержащий исследуемые значения хэш-функции (например, при
+помощи &laquo;Блокнота&raquo;). Ниже приведено содержимое такого
+файла, хранящего в себе 20 значений хэш-функции SHA1.</FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#2300dc" CELLPADDING=5 CELLSPACING=4>
+	<COL WIDTH=256*>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">51E7576A524051D8401D8A1EF12BD65D518B55C7</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">AE0E3AACF507607DEFDAC37574964384FC18F3AC</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">D9EB49F41C2363970F99584A697785FDB1A4F7B3</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">5DD38D3D1C516721B79599B4537BFFB56E97C8B0</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">655DCAA997C5F5DB69D807971DBBF27A2D46E327</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">18FD7F9D65029F4E7277EE719F2EF382945BFAEB</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">8D90FFD60B4C905B72EEFD591C23ADC4577BFF3B</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">4CF9DFB60A62650CAFC36D1D4EC8B147504A9A54</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">FE2DB16EBABEDCD16605F1677287E84CBB306146</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">30080914028E006F45AFAD74A2C524AC9BF80F9F</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">459cd8a3146de2e46635f24b841a5f25045b50cc</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">7566becb5f181316fe838cd4c301f59d50ff8ecb</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">b9d6b72964cea634b2b8c44f7a2fedcaed134025</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">c37e7c8fd457682199909708cf2da1144178e028</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">290516b50b2382629f73e1f7497e8cfe1cff0b6a</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">b82ba51fb1bb6528cd011c92aa79612253c0e387</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">dac63fcb6cd1322ce7aebaaf4016304b141d7a17</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">257cd5b35797adfc9ecd073a8512e6c66d998a5d</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">089af482cde49267862d8b515a1a0655bee1d7ea</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">bf1451bba3bad13f38fedc18a31487a8aff1ceb2</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>В
+одной строке указывается только одна хэш-функция, которая
+записывается в виде последовательности шестнадцатеричхных цифр.
+Другие символы не допустимы.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Допустим
+мы назвали файл с хэшами как &laquo;passw_sha1.txt&raquo;. Используя
+команду &laquo;<B>rcrack.exe</B>&raquo;, а именно &laquo;<FONT COLOR="#000000"><FONT FACE="Courier New, monospace"><FONT SIZE=3><B>rcrack
+sha1_loweralpha-numeric#1-6_0_2400x1000000_laba.rt -l passw_sha1.txt</B></FONT></FONT></FONT>&raquo;
+осуществляем попытку восстановления паролей пользователей:</FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#2300dc" CELLPADDING=5 CELLSPACING=4>
+	<COL WIDTH=256*>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;rcrack
+			sha1_loweralpha-numeric#1-6_0_2400x1000000_laba.rt -l
+			passw_sha1.txt</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">sha1_loweralpha-numeric#1-6_0_2400x1000000_laba.rt:</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">16000000
+			bytes read, disk access time: 0.03 s</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">verifying
+			the file...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">searching
+			for 20 hashes...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of ae0e3aacf507607defdac37574964384fc18f3ac is 9qz2</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 5dd38d3d1c516721b79599b4537bffb56e97c8b0 is 3ege</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 18fd7f9d65029f4e7277ee719f2ef382945bfaeb is ukq8</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 4cf9dfb60a62650cafc36d1d4ec8b147504a9a54 is w7h8</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of fe2db16ebabedcd16605f1677287e84cbb306146 is 7qq7</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 30080914028e006f45afad74a2c524ac9bf80f9f is hk7n</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 459cd8a3146de2e46635f24b841a5f25045b50cc is 9e5yf7</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 7566becb5f181316fe838cd4c301f59d50ff8ecb is 5e48mw</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 290516b50b2382629f73e1f7497e8cfe1cff0b6a is x8k2g3</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of b82ba51fb1bb6528cd011c92aa79612253c0e387 is 247qar</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 257cd5b35797adfc9ecd073a8512e6c66d998a5d is 9thu24</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 089af482cde49267862d8b515a1a0655bee1d7ea is h64r2x</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of bf1451bba3bad13f38fedc18a31487a8aff1ceb2 is 9f43yv</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">cryptanalysis
+			time: 50.34 s</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">statistics</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">-------------------------------------------------------</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			found: 13 of 20 (65.00%)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			disk access time: 0.03 s</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			cryptanalysis time: 50.34 s</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			chain walk step: 33326659</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			false alarm: 14935</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			chain walk step due to false alarm: 14218079</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">result</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">-------------------------------------------------------</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">51e7576a524051d8401d8a1ef12bd65d518b55c7
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">ae0e3aacf507607defdac37574964384fc18f3ac
+			9qz2 hex:39717a32</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">d9eb49f41c2363970f99584a697785fdb1a4f7b3
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">5dd38d3d1c516721b79599b4537bffb56e97c8b0
+			3ege hex:33656765</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">655dcaa997c5f5db69d807971dbbf27a2d46e327
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">18fd7f9d65029f4e7277ee719f2ef382945bfaeb
+			ukq8 hex:756b7138</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">8d90ffd60b4c905b72eefd591c23adc4577bff3b
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">4cf9dfb60a62650cafc36d1d4ec8b147504a9a54
+			w7h8 hex:77376838</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">fe2db16ebabedcd16605f1677287e84cbb306146
+			7qq7 hex:37717137</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">30080914028e006f45afad74a2c524ac9bf80f9f
+			hk7n hex:686b376e</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">459cd8a3146de2e46635f24b841a5f25045b50cc
+			9e5yf7 hex:396535796637</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">7566becb5f181316fe838cd4c301f59d50ff8ecb
+			5e48mw hex:356534386d77</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">b9d6b72964cea634b2b8c44f7a2fedcaed134025
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">c37e7c8fd457682199909708cf2da1144178e028
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">290516b50b2382629f73e1f7497e8cfe1cff0b6a
+			x8k2g3 hex:78386b326733</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">b82ba51fb1bb6528cd011c92aa79612253c0e387
+			247qar hex:323437716172</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">dac63fcb6cd1322ce7aebaaf4016304b141d7a17
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">257cd5b35797adfc9ecd073a8512e6c66d998a5d
+			9thu24 hex:397468753234</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">089af482cde49267862d8b515a1a0655bee1d7ea
+			h64r2x hex:683634723278</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">bf1451bba3bad13f38fedc18a31487a8aff1ceb2
+			9f43yv hex:396634337976</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>После
+непродолжительного времени ожидания на экран выводится приведённый
+выше отчёт. Из него следует, что было восстановлено 13 паролей из 20
+(65%) и ушло на это 50,34 секунды. Если бы мы использовали метод
+полного перебора (метод грубой силы), то у нас на обработку <I><B>каждого</B></I>
+пароля ушло бы более 50 минут! Учитывая при этом, что пароли
+сформированы случайным образом (нельзя использовать атаки по словарю
+и т.д.) и их длина составляет 6 символов.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Всё
+это показывает эффективность метода &laquo;размен время &mdash; объём
+памяти&raquo;, когда заранее осуществляется большое количество
+операций по вычислению специальной таблицы, а этап восстановления
+паролей пользователей затем занимает несколько секунд. </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=4><FONT FACE="Times New Roman, serif">Ниже
+приведена аналогичная последовательность действий по созданию
+радужной таблицы для хэш-функции MD5 и по восстановлению на её основе
+паролей пользователей:</FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#2300dc" CELLPADDING=5 CELLSPACING=4>
+	<COL WIDTH=256*>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;rtgen.exe
+			md5 loweralpha-numeric 1 6 0 2400 1000000 laba</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">hash
+			routine: md5</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">hash
+			length: 16</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			charset: abcdefghijklmnopqrstuvwxyz0123456789</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			charset in hex: 61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70 71
+			72 73 7</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">4 75
+			76 77 78 79 7a 30 31 32 33 34 35 36 37 38 39</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			length range: 1 - 6</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			charset name: loweralpha-numeric</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plain
+			space total: 2238976116</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">rainbow
+			table index: 0</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">reduce
+			offset: 0</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">generating...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">100000
+			of 1000000 rainbow chains generated (3 m 48 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">200000
+			of 1000000 rainbow chains generated (3 m 48 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">300000
+			of 1000000 rainbow chains generated (3 m 47 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">400000
+			of 1000000 rainbow chains generated (3 m 48 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">500000
+			of 1000000 rainbow chains generated (3 m 47 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">600000
+			of 1000000 rainbow chains generated (3 m 50 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">700000
+			of 1000000 rainbow chains generated (3 m 46 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">800000
+			of 1000000 rainbow chains generated (3 m 46 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">900000
+			of 1000000 rainbow chains generated (3 m 46 s)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">1000000
+			of 1000000 rainbow chains generated (3 m 46 s)</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;rtsort
+			md5_loweralpha-numeric#1-6_0_2400x1000000_laba.rt</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">available
+			physical memory: 2147483647 bytes</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">loading
+			rainbow table...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">sorting
+			rainbow table...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">writing
+			sorted rainbow table...</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;rcrack
+			md5_loweralpha-numeric#1-6_0_2400x1000000_laba.rt</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">-l
+			passw_md5.txt</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">md5_loweralpha-numeric#1-6_0_2400x1000000_laba.rt:</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">16000000
+			bytes read, disk access time: 0.02 s</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">verifying
+			the file...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">searching
+			for 10 hashes...</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 7e2738461e608bd3cb37c1254abf01e3 is 4q78sw</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 9b46bc33d4f5488e57809d2e639a74fa is r578fk</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of a171fd24e3b5e58e7dca55adfbfd4a5c is 6dv9y4</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 225d3dc7ef980c60d5b034befcbf0f6c is 6r8sx4</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of d2ef193311068b8d20bba8b0025f8b10 is tqz235</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of 4b471eee8962c247db66eb6be05bd998 is yq9k72</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			of a868905e40cd6bc3108f2744e343ee01 is gp2w78</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">cryptanalysis
+			time: 20.36 s</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">statistics</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">-------------------------------------------------------</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">plaintext
+			found: 7 of 10 (70.00%)</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			disk access time: 0.02 s</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			cryptanalysis time: 20.36 s</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			chain walk step: 14869349</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			false alarm: 6641</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">total
+			chain walk step due to false alarm: 6786193</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">result</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">-------------------------------------------------------</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">7e2738461e608bd3cb37c1254abf01e3
+			4q78sw hex:347137387377</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">9b46bc33d4f5488e57809d2e639a74fa
+			r578fk hex:72353738666b</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">a171fd24e3b5e58e7dca55adfbfd4a5c
+			6dv9y4 hex:366476397934</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">225d3dc7ef980c60d5b034befcbf0f6c
+			6r8sx4 hex:367238737834</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">29868768988957f5d34eb3c01e129484
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">d2ef193311068b8d20bba8b0025f8b10
+			tqz235 hex:74717a323335</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">69695ae2def03d1b00d10193143fc389
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">d971a9c45c4158b332895940a2b6ee0e
+			&lt;notfound&gt; hex:&lt;notfound&gt;</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">4b471eee8962c247db66eb6be05bd998
+			yq9k72 hex:7971396b3732</FONT></FONT></P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">a868905e40cd6bc3108f2744e343ee01
+			gp2w78 hex:677032773738</FONT></FONT></P>
+			<P><BR>
+			</P>
+			<P><FONT COLOR="#008000"><FONT FACE="Courier New, monospace">C:\rainbowcrack-1.2-win&gt;</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080925;1230488">
+	<META NAME="CHANGED" CONTENT="20080925;1275405">
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><FONT COLOR="#0000ff"><B>Md5.cpp</B></FONT></P>
+<P>//------------------------------------------------------------------</P>
+<P>// md5.cpp - modified by Wei Dai from Colin Plumb's public domain
+md5.c</P>
+<P>// any modifications are placed in the public domain</P>
+<P><BR><BR>
+</P>
+<P>#include &quot;pch.h&quot;</P>
+<P>#include &quot;md5.h&quot;</P>
+<P>#include &quot;misc.h&quot;</P>
+<P><BR><BR>
+</P>
+<P>NAMESPACE_BEGIN(CryptoPP)</P>
+<P><BR><BR>
+</P>
+<P>void MD5_TestInstantiations()</P>
+<P>{</P>
+<P>	MD5 x;</P>
+<P>}</P>
+<P><BR><BR>
+</P>
+<P>void MD5::Init()</P>
+<P>{</P>
+<P>	m_digest[0] = 0x67452301L;</P>
+<P>	m_digest[1] = 0xefcdab89L;</P>
+<P>	m_digest[2] = 0x98badcfeL;</P>
+<P>	m_digest[3] = 0x10325476L;</P>
+<P>}</P>
+<P><BR><BR>
+</P>
+<P>void MD5::Transform (word32 *digest, const word32 *in)</P>
+<P>{</P>
+<P>// #define F1(x, y, z) (x &amp; y | ~x &amp; z)</P>
+<P>#define F1(x, y, z) (z ^ (x &amp; (y ^ z)))</P>
+<P>#define F2(x, y, z) F1(z, x, y)</P>
+<P>#define F3(x, y, z) (x ^ y ^ z)</P>
+<P>#define F4(x, y, z) (y ^ (x | ~z))</P>
+<P><BR><BR>
+</P>
+<P>#define MD5STEP(f, w, x, y, z, data, s) \</P>
+<P>	w = rotlFixed(w + f(x, y, z) + data, s) + x</P>
+<P><BR><BR>
+</P>
+<P>    word32 a, b, c, d;</P>
+<P><BR><BR>
+</P>
+<P>	a=digest[0];</P>
+<P>	b=digest[1];</P>
+<P>	c=digest[2];</P>
+<P>	d=digest[3];</P>
+<P><BR><BR>
+</P>
+<P>    MD5STEP(F1, a, b, c, d, in[0] + 0xd76aa478, 7);</P>
+<P>    MD5STEP(F1, d, a, b, c, in[1] + 0xe8c7b756, 12);</P>
+<P>    MD5STEP(F1, c, d, a, b, in[2] + 0x242070db, 17);</P>
+<P>    MD5STEP(F1, b, c, d, a, in[3] + 0xc1bdceee, 22);</P>
+<P>    MD5STEP(F1, a, b, c, d, in[4] + 0xf57c0faf, 7);</P>
+<P>    MD5STEP(F1, d, a, b, c, in[5] + 0x4787c62a, 12);</P>
+<P>    MD5STEP(F1, c, d, a, b, in[6] + 0xa8304613, 17);</P>
+<P>    MD5STEP(F1, b, c, d, a, in[7] + 0xfd469501, 22);</P>
+<P>    MD5STEP(F1, a, b, c, d, in[8] + 0x698098d8, 7);</P>
+<P>    MD5STEP(F1, d, a, b, c, in[9] + 0x8b44f7af, 12);</P>
+<P>    MD5STEP(F1, c, d, a, b, in[10] + 0xffff5bb1, 17);</P>
+<P>    MD5STEP(F1, b, c, d, a, in[11] + 0x895cd7be, 22);</P>
+<P>    MD5STEP(F1, a, b, c, d, in[12] + 0x6b901122, 7);</P>
+<P>    MD5STEP(F1, d, a, b, c, in[13] + 0xfd987193, 12);</P>
+<P>    MD5STEP(F1, c, d, a, b, in[14] + 0xa679438e, 17);</P>
+<P>    MD5STEP(F1, b, c, d, a, in[15] + 0x49b40821, 22);</P>
+<P><BR><BR>
+</P>
+<P>    MD5STEP(F2, a, b, c, d, in[1] + 0xf61e2562, 5);</P>
+<P>    MD5STEP(F2, d, a, b, c, in[6] + 0xc040b340, 9);</P>
+<P>    MD5STEP(F2, c, d, a, b, in[11] + 0x265e5a51, 14);</P>
+<P>    MD5STEP(F2, b, c, d, a, in[0] + 0xe9b6c7aa, 20);</P>
+<P>    MD5STEP(F2, a, b, c, d, in[5] + 0xd62f105d, 5);</P>
+<P>    MD5STEP(F2, d, a, b, c, in[10] + 0x02441453, 9);</P>
+<P>    MD5STEP(F2, c, d, a, b, in[15] + 0xd8a1e681, 14);</P>
+<P>    MD5STEP(F2, b, c, d, a, in[4] + 0xe7d3fbc8, 20);</P>
+<P>    MD5STEP(F2, a, b, c, d, in[9] + 0x21e1cde6, 5);</P>
+<P>    MD5STEP(F2, d, a, b, c, in[14] + 0xc33707d6, 9);</P>
+<P>    MD5STEP(F2, c, d, a, b, in[3] + 0xf4d50d87, 14);</P>
+<P>    MD5STEP(F2, b, c, d, a, in[8] + 0x455a14ed, 20);</P>
+<P>    MD5STEP(F2, a, b, c, d, in[13] + 0xa9e3e905, 5);</P>
+<P>    MD5STEP(F2, d, a, b, c, in[2] + 0xfcefa3f8, 9);</P>
+<P>    MD5STEP(F2, c, d, a, b, in[7] + 0x676f02d9, 14);</P>
+<P>    MD5STEP(F2, b, c, d, a, in[12] + 0x8d2a4c8a, 20);</P>
+<P><BR><BR>
+</P>
+<P>    MD5STEP(F3, a, b, c, d, in[5] + 0xfffa3942, 4);</P>
+<P>    MD5STEP(F3, d, a, b, c, in[8] + 0x8771f681, 11);</P>
+<P>    MD5STEP(F3, c, d, a, b, in[11] + 0x6d9d6122, 16);</P>
+<P>    MD5STEP(F3, b, c, d, a, in[14] + 0xfde5380c, 23);</P>
+<P>    MD5STEP(F3, a, b, c, d, in[1] + 0xa4beea44, 4);</P>
+<P>    MD5STEP(F3, d, a, b, c, in[4] + 0x4bdecfa9, 11);</P>
+<P>    MD5STEP(F3, c, d, a, b, in[7] + 0xf6bb4b60, 16);</P>
+<P>    MD5STEP(F3, b, c, d, a, in[10] + 0xbebfbc70, 23);</P>
+<P>    MD5STEP(F3, a, b, c, d, in[13] + 0x289b7ec6, 4);</P>
+<P>    MD5STEP(F3, d, a, b, c, in[0] + 0xeaa127fa, 11);</P>
+<P>    MD5STEP(F3, c, d, a, b, in[3] + 0xd4ef3085, 16);</P>
+<P>    MD5STEP(F3, b, c, d, a, in[6] + 0x04881d05, 23);</P>
+<P>    MD5STEP(F3, a, b, c, d, in[9] + 0xd9d4d039, 4);</P>
+<P>    MD5STEP(F3, d, a, b, c, in[12] + 0xe6db99e5, 11);</P>
+<P>    MD5STEP(F3, c, d, a, b, in[15] + 0x1fa27cf8, 16);</P>
+<P>    MD5STEP(F3, b, c, d, a, in[2] + 0xc4ac5665, 23);</P>
+<P><BR><BR>
+</P>
+<P>    MD5STEP(F4, a, b, c, d, in[0] + 0xf4292244, 6);</P>
+<P>    MD5STEP(F4, d, a, b, c, in[7] + 0x432aff97, 10);</P>
+<P>    MD5STEP(F4, c, d, a, b, in[14] + 0xab9423a7, 15);</P>
+<P>    MD5STEP(F4, b, c, d, a, in[5] + 0xfc93a039, 21);</P>
+<P>    MD5STEP(F4, a, b, c, d, in[12] + 0x655b59c3, 6);</P>
+<P>    MD5STEP(F4, d, a, b, c, in[3] + 0x8f0ccc92, 10);</P>
+<P>    MD5STEP(F4, c, d, a, b, in[10] + 0xffeff47d, 15);</P>
+<P>    MD5STEP(F4, b, c, d, a, in[1] + 0x85845dd1, 21);</P>
+<P>    MD5STEP(F4, a, b, c, d, in[8] + 0x6fa87e4f, 6);</P>
+<P>    MD5STEP(F4, d, a, b, c, in[15] + 0xfe2ce6e0, 10);</P>
+<P>    MD5STEP(F4, c, d, a, b, in[6] + 0xa3014314, 15);</P>
+<P>    MD5STEP(F4, b, c, d, a, in[13] + 0x4e0811a1, 21);</P>
+<P>    MD5STEP(F4, a, b, c, d, in[4] + 0xf7537e82, 6);</P>
+<P>    MD5STEP(F4, d, a, b, c, in[11] + 0xbd3af235, 10);</P>
+<P>    MD5STEP(F4, c, d, a, b, in[2] + 0x2ad7d2bb, 15);</P>
+<P>    MD5STEP(F4, b, c, d, a, in[9] + 0xeb86d391, 21);</P>
+<P><BR><BR>
+</P>
+<P>	digest[0]+=a;</P>
+<P>	digest[1]+=b;</P>
+<P>	digest[2]+=c;</P>
+<P>	digest[3]+=d;</P>
+<P>}</P>
+<P><BR><BR>
+</P>
+<P>NAMESPACE_END</P>
+<P>//------------------------------------------------------------------</P>
+<P><BR><BR>
+</P>
+<P><FONT COLOR="#0000ff"><B>md5.h</B></FONT></P>
+<P>//------------------------------------------------------------------</P>
+<P>#ifndef CRYPTOPP_MD5_H</P>
+<P>#define CRYPTOPP_MD5_H</P>
+<P><BR><BR>
+</P>
+<P>#include &quot;iterhash.h&quot;</P>
+<P><BR><BR>
+</P>
+<P>NAMESPACE_BEGIN(CryptoPP)</P>
+<P><BR><BR>
+</P>
+<P>//! &lt;a
+href=&quot;http://www.weidai.com/scan-mirror/md.html#MD5&quot;&gt;MD5&lt;/a&gt;</P>
+<P>/*! 128 Bit Hash */</P>
+<P>class MD5 : public IteratedHashWithStaticTransform&lt;word32,
+LittleEndian, 64, MD5&gt;</P>
+<P>{</P>
+<P>public:</P>
+<P>	enum {DIGESTSIZE = 16};</P>
+<P>	MD5() : IteratedHashWithStaticTransform&lt;word32, LittleEndian,
+64, MD5&gt;(DIGESTSIZE) {Init();}</P>
+<P>	static void Transform(word32 *digest, const word32 *data);</P>
+<P>	static const char * StaticAlgorithmName() {return &quot;MD5&quot;;}</P>
+<P><BR><BR>
+</P>
+<P>protected:</P>
+<P>	void Init();</P>
+<P>};</P>
+<P><BR><BR>
+</P>
+<P>NAMESPACE_END</P>
+<P><BR><BR>
+</P>
+<P>#endif</P>
+</BODY>
+</HTML>

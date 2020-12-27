@@ -1,0 +1,7 @@
+table C:/Users/User/Desktop/mop_evm/BIT/lab5(Passwords)/lr1/data/progs/ophcrack-3.8.0-bin/tables_xp_free_small,0,1,2,3
+nthreads 8
+nhredux 50000
+maxdqueue 500
+bforce 1
+hideuname 0
+auditmode 0

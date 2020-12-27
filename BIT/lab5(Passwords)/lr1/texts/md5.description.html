@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080924;23310830">
+	<META NAME="CHANGED" CONTENT="20080929;244743">
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#0000ff"><FONT SIZE=4 STYLE="font-size: 16pt"><B>2.1.
+Описание хэш-функции MD5</B></FONT></FONT> </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>MD5</B></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><I>(Message Digest
+5)</I></FONT></FONT> &mdash; <FONT FACE="Times New Roman, serif"><FONT SIZE=4>128-битный
+алгоритм <A HREF="http://ru.wikipedia.org/wiki/Хеширование">хеширования</A>,
+разработанный профессором <A HREF="http://ru.wikipedia.org/wiki/Ривест,_Рональд">Рональдом
+Л. Ривестом</A> в <A HREF="http://ru.wikipedia.org/wiki/1991">1991</A>
+году. Предназначен для создания &laquo;отпечатков&raquo; или
+&laquo;дайджестов&raquo; сообщений произвольной длины. Пришёл на
+смену <A HREF="http://ru.wikipedia.org/wiki/MD4">MD4</A>, который был
+несовершенен. Описан в <A HREF="http://tools.ietf.org/html/rfc1321">RFC
+1321</A>.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>В
+<A HREF="http://ru.wikipedia.org/wiki/2004">2004</A> китайские
+исследователи Ван Сяоюнь (Wang Xiaoyun), Фен Дэнгуо (Feng Dengguo),
+Лай Сюэцзя (Lai Xuejia) и Юй Хунбо (Yu Hongbo) объявили об
+обнаруженной ими уязвимости в алгоритме, позволяющей за небольшое
+время(1 час на <A HREF="http://ru.wikipedia.org/wiki/Кластер">кластере</A>
+IBM p690) находить <A HREF="http://ru.wikipedia.org/wiki/Коллизия_хэш-функции">коллизии</A>
+<A HREF="http://eprint.iacr.org/2004/199">[1]</A><A HREF="http://eprint.iacr.org/2004/264">[2]</A>.
+К сожалению, авторы так и не открыли свой секрет широкой публике.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>В
+<A HREF="http://ru.wikipedia.org/wiki/2006">2006</A> году чешский
+исследователь Властимил Клима опубликовал алгоритм <A HREF="http://eprint.iacr.org/2006/105">[3]</A><A HREF="http://cryptography.hyperlink.cz/MD5_collisions.html">[4]
+</A>позволяющий находить <A HREF="http://ru.wikipedia.org/wiki/Коллизия_хэш-функции">коллизии</A>
+на обычном компьютере с любым начальным вектором (A,B,C,D), при
+помощи метода, названного им &quot;туннелирование&quot; .</FONT></FONT></P>
+<H2><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Алгоритм MD5</FONT></FONT></H2>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Входные
+	данные выравниваются так, чтобы их размер был сравним с 448 по
+	модулю 512. Сначала дописывается единичный бит(даже если длина уже
+	конгруэнтна сравнима с 448), затем необходимое число нулевых бит. </FONT></FONT>
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Дописывание
+	64-битного представления длины данных до выравнивания. Если длина
+	превосходит 2<SUP>64</SUP> &minus; 1, то дописываются младшие биты. </FONT></FONT>
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Инициализируются
+	4 переменных размером по 32 бита: </FONT></FONT>
+	</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>А
+		= 01 23 45 67; </FONT></FONT>
+		</P>
+		<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>В
+		= 89 AB CD EF; </FONT></FONT>
+		</P>
+		<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>С
+		= FE DC BA 98; </FONT></FONT>
+		</P>
+		<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>D
+		= 76 54 32 10. </FONT></FONT>
+		</P>
+	</UL>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Выравненные
+	данные разбиваются на блоки по 32 бит, и каждый блок проходит 4
+	раунда из 16 операторов. Все операторы однотипны и имеют вид: [abcd
+	k s i], определяемый как <I>a</I> = <I>b</I> + ((<I>a</I> +
+	<I>Fun</I>(<I>b</I>,<I>c</I>,<I>d</I>) + <I>X</I>[<I>k</I>] + <I>T</I>
+	&lt; <I>i</I> &gt; ) &lt; &lt; &lt; <I>s</I>), где X - блок данных,
+	а T[1..64] - 64х элементная таблица данных построенная следующим
+	образом: <I>T</I>[<I>i</I>] = <I>int</I>(4294967296 * | <I>sin</I>(<I>i</I>)
+	| ), s - циклический сдвиг влево на s бит полученого 32-битного
+	аргумента. </FONT></FONT>
+	</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>В
+		первом раунде Fun F(X, Y, Z) = XY v (not X)Z </FONT></FONT>
+		</P>
+		<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Во
+		втором раунде Fun G(X, Y, Z) = XZ v (not Z)Y. </FONT></FONT>
+		</P>
+		<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>В
+		третьем раунде Fun Н(Х, Y, Z) = Х xor Y xor Z. </FONT></FONT>
+		</P>
+		<LI><P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>В четвертом
+		раунде Fun I(Х, Y, Z) = Y xor (X v (not Z)). </FONT></FONT>
+		</P>
+	</UL>
+</UL>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Это происходит
+следующим образом:</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>/*Сохраняются
+значения A, B, C и D оставшиеся после операций над предыдущими
+блоками(или их начальные значения если блок первый)*/</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>AA = A</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>BB = B</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>CC = C</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>DD = D</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Раунд 1</B></FONT></FONT></P>
+<PRE>/*[abcd k s i] a = b + ((a + F(b,c,d) + X[k] + T[i]) &lt;&lt;&lt; s). */
+[ABCD  0 7  1][DABC  1 12  2][CDAB  2 17  3][BCDA  3 22  4]
+[ABCD  4 7  5][DABC  5 12  6][CDAB  6 17  7][BCDA  7 22  8]
+[ABCD  8 7  9][DABC  9 12 10][CDAB 10 17 11][BCDA 11 22 12]
+[ABCD 12 7 13][DABC 13 12 14][CDAB 14 17 15][BCDA 15 22 16]</PRE><P>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Раунд 2</B></FONT></FONT></P>
+<PRE>/*[abcd k s i] a = b + ((a + G(b,c,d) + X[k] + T[i]) &lt;&lt;&lt; s). */
+[ABCD  1 5 17][DABC  6 9 18][CDAB 11 14 19][BCDA  0 20 20]
+[ABCD  5 5 21][DABC 10 9 22][CDAB 15 14 23][BCDA  4 20 24]
+[ABCD  9 5 25][DABC 14 9 26][CDAB  3 14 27][BCDA  8 20 28]
+[ABCD 13 5 29][DABC  2 9 30][CDAB  7 14 31][BCDA 12 20 32]</PRE><P>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Раунд 3</B></FONT></FONT></P>
+<PRE>/*[abcd k s i] a = b + ((a + H(b,c,d) + X[k] + T[i]) &lt;&lt;&lt; s). */
+[ABCD  5 4 33][DABC  8 11 34][CDAB 11 16 35][BCDA 14 23 36]
+[ABCD  1 4 37][DABC  4 11 38][CDAB  7 16 39][BCDA 10 23 40]
+[ABCD 13 4 41][DABC  0 11 42][CDAB  3 16 43][BCDA  6 23 44]
+[ABCD  9 4 45][DABC 12 11 46][CDAB 15 16 47][BCDA  2 23 48]</PRE><P>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Раунд 4</B></FONT></FONT></P>
+<PRE>/*[abcd k s i] a = b + ((a + I(b,c,d) + X[k] + T[i]) &lt;&lt;&lt; s). */
+[ABCD  0 6 49][DABC  7 10 50][CDAB 14 15 51][BCDA  5 21 52]
+[ABCD 12 6 53][DABC  3 10 54][CDAB 10 15 55][BCDA  1 21 56]
+[ABCD  8 6 57][DABC 15 10 58][CDAB  6 15 59][BCDA 13 21 60]
+[ABCD  4 6 61][DABC 11 10 62][CDAB  2 15 63][BCDA  9 21 64]</PRE><P>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>/*Суммирование*/</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>A = AA + A</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>B = BB + B</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>C = CC + C</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>D = DD + D</FONT></FONT></P>
+<UL>
+	<LI><P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Итоговый хеш
+	&mdash; ABCD</FONT></FONT></P>
+</UL>
+<P ALIGN=CENTER><IMG SRC="md5.description_html_m1283aad3.jpg" NAME="Графический объект2" ALIGN=LEFT WIDTH=934 HEIGHT=410 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4><I>Рис.4.</I>
+Главный цикл MD5</FONT></FONT></P>
+<P ALIGN=CENTER><IMG SRC="md5.description_html_5614a645.jpg" NAME="Графический объект1" ALIGN=LEFT WIDTH=831 HEIGHT=406 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4><I>Рис.5.</I>
+Один раунд преобразований MD5</FONT></FONT></P>
+</BODY>
+</HTML>

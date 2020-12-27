@@ -1,0 +1,17 @@
+Изучение работы блочного криптоалгоритма "Кузнечик" (используя исходный код)
+
+Даны:
+1. Исходный код Кузнечика (высылаю исходники от Saarinen)
+2. Под Linux перейти в каталог с исходным кодом.
+3. Открыть в редакторе (например, GEDIT) и исследовать файлы main.c, main.h, kuznechik_8bit.c, kuznechik.h
+4. Скомпилировать и запустить программу
+
+gcc -Wall -Ofast -march=native  -c main.c -o main.o
+gcc -Wall -Ofast -march=native  -c kuznechik_8bit.c -o kuznechik_8bit.o
+gcc  -o xtest main.o kuznechik_8bit.o
+
+./xtest
+
+Проанализировать результаты выполнения (в консоли) и занести их в отчёт.
+
+(В каталоге /doc описание криптоалгоритма)

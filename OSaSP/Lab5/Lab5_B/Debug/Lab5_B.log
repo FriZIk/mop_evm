@@ -1,0 +1,8 @@
+﻿cl : командная строка warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  stdafx.c
+  Lab5_B.c
+C:\Users\User\Desktop\mop_evm\OSaSP\Lab5\Lab5_B\Lab5_B.c(33,3): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\User\Desktop\mop_evm\OSaSP\Lab5\Lab5_B\Lab5_B.c(10,49): warning C4101: hStopEvent: неиспользованная локальная переменная
+  Создание кода...
+Lab5_B.obj : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/SAFESEH"
+  Lab5_B.vcxproj -> C:\Users\User\Desktop\mop_evm\OSaSP\Lab5\Debug\Lab5_B.exe

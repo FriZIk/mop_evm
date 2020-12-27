@@ -1,0 +1,7 @@
+﻿cl : командная строка warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  Lab4_2.c
+Lab4_2.obj : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/SAFESEH"
+Source.obj : error LNK2005: _ThreadProc@4 уже определен в Lab4_2.obj
+LINK : warning LNK4067: неоднозначная точка входа; выбрана "mainCRTStartup"
+Source.obj : error LNK2019: ссылка на неразрешенный внешний символ _Error в функции _wmain.
+C:\Users\User\Desktop\mop_evm\OSaSP\Lab4\Debug\Lab4_2.exe : fatal error LNK1120: неразрешенных внешних элементов: 1

@@ -1,0 +1,54 @@
+  €ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€
+  €        ‹‹‹‹‹    ‹€€€€€€ ‹€€€€€‹ ‹€€   ﬂ€  €€€€€€ﬂ      €€€€ﬂﬂﬂﬂﬂ€€€€€€€€€
+  €  ‹‹‹‹‹ ﬂﬂﬂﬂﬂ    €€‹‹‹‹  €€‹‹‹€€ €€ €ﬂﬂﬂ€  €€€€€€  ﬂﬂﬂﬂ€€€€€‹‹‹‹‹€ﬂﬂﬂﬂﬂ€€€
+  €  ﬂﬂﬂﬂﬂ ‹‹‹‹‹    €€ﬂﬂﬂﬂ  €€ﬂﬂﬂ€€ €€ €€  €  €€€€€€  ‹‹‹‹€€€€€ﬂﬂﬂﬂﬂ€‹‹‹‹‹€€€
+  €        ﬂﬂﬂﬂﬂ    ﬂ€€€€€€ €€   €€ ﬂ€€   ‹€       €‹      €€€€‹‹‹‹‹€€€€€€€€€
+  €‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€
+
+  Program ............................. [ BruteHash                         ]
+  Version ............................. [ 1.4                               ]
+  Company/Author ...................... [ -= Eagle =-                       ]
+  Language ............................ [ English                           ]
+  Release date ........................ [ 05.23.2005                        ]
+  OS .................................. [ Windows                           ]
+  URL/FTP ............................. [ http://cracklab.ru                ]
+  E-Mail .............................. [ eagle-iam@narod.ru                ]
+  Install type ........................ [ Manual                            ]
+  Protection .......................... [ None, packed with UPX 1.25        ]
+
+  Program description:
+
+     I don't have my own homepage, but you can download BruteHash from
+  CR@CKLAB portal.
+     This version also includes sources.
+     If you have some questions or proposition - mail me right now! (rus/eng)
+
+  History:
+  --------
+
+     v. 1.4      - Public release, features:
+                      * bugfix: function "Keep as is" may work wrongly
+                      * algorithm improvement
+                      - no dictionnary loading (only amount of words
+                        counting)
+
+     v. 1.3      - Private release, features:
+                      * minor fix: loading dictionary when opening file.
+                        This may decrease brunting time of unrecognized
+                        by you hash algorithm
+
+     v. 1.2      - Public release, features:
+                      - words generation (because work is VERY slow)
+                      * algorithm improvement
+                      + dictionnary words case adjusting
+                      + added history
+
+     v. 1.2 beta - Internal version:
+                      + words generation (useless function - VERY slow work)
+
+     v. 1.1      - Fisrt public release, spreaded in CR@CKLAB
+                   (Thanks to Bad_guy):
+                      + support of 9 new algorythms: Haval, MD4, RMD128,
+                        RMD160, SHA1, SHA256, SHA385, SHA512, TIGER
+                                       
+     v. 1.0      - Internal version, only MD5 hash support

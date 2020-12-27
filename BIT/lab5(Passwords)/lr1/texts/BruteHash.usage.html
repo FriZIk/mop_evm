@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080924;1391998">
+	<META NAME="CHANGED" CONTENT="20080929;282450">
+	<STYLE TYPE="text/css">
+	<!--
+		P { margin-bottom: 0.21cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>3.2.
+Порядок работы с BruteHash</B></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=4><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif">Для
+восстановления паролей по имеющимся хэш-функциям воспользуемся
+программой </FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><B>BruteHash.
+</B></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><SPAN STYLE="font-weight: medium">После
+её запуска указываем тип используемой хэш-функции (в нашем случае это
+SHA1),</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/part2/01%20select%20SHA1.gif" NAME="Графический объект1" ALIGN=LEFT WIDTH=319 HEIGHT=390 BORDER=0><BR CLEAR=LEFT><BR>
+</P>
+<P STYLE="margin-bottom: 0cm; font-weight: medium"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=4>а
+также файл словаря, который содержит список возможных паролей. Для
+чего нажимаем кнопку &laquo;Dictionnary&raquo; и в появившемся
+диалоговом окне выбираем требуемый файл словаря. </FONT></FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/part2/02%20select%20dictionary.gif" NAME="Графический объект2" ALIGN=LEFT WIDTH=642 HEIGHT=390 BORDER=0><BR CLEAR=LEFT><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=4>После
+выбора словаря можно приступать к попыткам восстановления паролей
+пользователей. Для этого в исходном диалоговом окне вставляем
+требуемый хэш и нажатием кнопки &quot;Start&quot; начинаем попытку
+восстановления.</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/part2/03%20start%20recovery.gif" NAME="Графический объект3" ALIGN=LEFT WIDTH=320 HEIGHT=389 BORDER=0><BR CLEAR=LEFT><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=4>В
+результате опробовывания первого значения хэш-функции программа очень
+быстро восстановила пароль &laquo;user&raquo;:</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/part2/04%20result%201.gif" NAME="Графический объект4" ALIGN=LEFT WIDTH=320 HEIGHT=388 BORDER=0><BR CLEAR=LEFT><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=4>Однако
+опробование второго значения хэш-функции не принесло положительных
+результатов:</FONT></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><IMG SRC="images/part2/05%20result%202.gif" NAME="Графический объект5" ALIGN=LEFT WIDTH=319 HEIGHT=388 BORDER=0><BR CLEAR=LEFT><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=4>После
+опробования всех наших хэшей удалось восстановить только небольшую
+долю паролей:</FONT></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=4><B>user</B></FONT></FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=4><B>mauser</B></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=4><B>fantom</B></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=4>Это
+объясняется тем, что данная программа работает только со словарём. То
+есть, создав файл словаря, имеющий все комбинации слов из 4-х
+символов, мы можем очень быстро восстановить короткие пароли
+пользователей и т.д. Однако формирование словарей для более длинных
+паролей и случайных паролей является проблематичной задачей.
+Следовательно, возможности данной программы сильно ограничены и не
+идут в никакое сравнение с программами, использующих радужные таблицы
+(rainbow tables). </FONT></FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+</BODY>
+</HTML>

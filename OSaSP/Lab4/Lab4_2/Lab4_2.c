@@ -1,46 +1,33 @@
-// Lab4_2.c : Defines the entry point for the console application.
-//
-
-#include "stdafx.h"
+#define _WIN32_WINNT 0x0501
+#include <windows.h>
 #include <stdlib.h>
-#include "windows.h"
 #include <locale.h>
+#include <stdio.h>
 
-int _tmain(int argc, _TCHAR* argv[])
-{
-	HANDLE hKillBEvent, hPrintEvent;
-	HANDLE Handles[2];
-	int waitResult;
-	int count = 0;
+#define NUMBER_OF_THREADS 10 // Количество создаваемыъ процессов
 
-	setlocale(LC_ALL,"Rus");
-	hKillBEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, _T("LAB2_KillBEvent"));
-	if (!hKillBEvent) {
-		printf("%s", "Не удалось открыть событие KillBEvent.\n");
-		getchar();
-		return 1;
-	}
-	hPrintEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, _T("LAB2_PrintEvent"));
-	if (!hPrintEvent) {
-		printf("%s", "Не удалось открыть событие PrintEvent.\n");
-		//errCode = 2;
-		getchar();
-		return 2;
-	}
-
-	Handles[0] = hKillBEvent;
-	Handles[1] = hPrintEvent;
-	while (TRUE) {
-		waitResult = WaitForMultipleObjects(2, Handles, FALSE, INFINITE);
-		if (waitResult == 0) {
-			break;
-		}
-		printf("%d\n", ++count);
-		Sleep(1000);
-	}
-
-	CloseHandle(hKillBEvent);
-	CloseHandle(hPrintEvent);
-	return 0;
+DWORD WINAPI ThreadProc(CONST LPVOID lpParam) {
+    CONST HANDLE hMutex = (CONST HANDLE)lpParam;
+    printf("Я родился, номер:%d.\n", *(DWORD*)lpParam);
+    ReleaseMutex(hMutex);
+    ExitThread(0);
 }
 
+int main(void)
+{
+    setlocale(LC_ALL, "Russian");
+    HANDLE hThreads[NUMBER_OF_THREADS];
+    DWORD Number;
+
+    CONST HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONST HANDLE hMutex = CreateMutex(NULL, FALSE, NULL);
+    for (int i = 0; i < NUMBER_OF_THREADS; i++)
+    {
+        Number = i;
+        //hThreads[i] = CreateThread(NULL, 0, &ThreadProc, &Number, 0, NULL);
+        hThreads[i] = CreateThread(NULL, 0, &ThreadProc, hMutex, 0, NULL);
+        if (hThreads[i] == NULL)
+            printf("CreateThread() failed, error: %d.\n", GetLastError());
+    }
+    return 0;
+}

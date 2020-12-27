@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080923;3002129">
+	<META NAME="CHANGED" CONTENT="20080928;23454746">
+	<STYLE TYPE="text/css">
+	<!--
+		P { margin-bottom: 0.21cm }
+		H1 { margin-bottom: 0.21cm }
+		H1.western { font-family: "Arial", sans-serif; font-size: 16pt }
+		H1.cjk { font-size: 16pt }
+		H1.ctl { font-size: 16pt }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<H1 CLASS="western" STYLE="font-style: normal; page-break-before: always">
+<FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 16pt">1.3.
+Аутентификация на основе многоразовых паролей (простая
+аутентификация)</FONT></FONT></FONT></H1>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>В современных
+операционных системах (ОС) предусматривается централизованная служба
+аутентификации, которая выполняется одним из серверов сети и
+использует для своей работы базу данных. В этой базе данных хранятся
+учётные данные о пользователях сети, в которые включена информация о
+идентификаторах и паролях пользователей.</FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>Процедура простой
+аутентификации пользователя в сети заключается в следующем. При
+попытке логического входа в сеть пользователь вводит свои
+идентификатор и пароль, которые поступают для обработки на сервер
+аутентификации. На сервере аутентификации производится сравнение
+введённой информации с хранящейся в базе данных и при её соответствии
+(совпадении) пользователь получает легальный статус.</FONT></FONT></P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>Способы передачи
+пароля и идентификации пользователя:</FONT></FONT></P>
+<OL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>в
+	незашифрованном виде (например, <SPAN LANG="en-US">PAP</SPAN>
+	(<SPAN LANG="en-US">Password</SPAN> <SPAN LANG="en-US">Authentication</SPAN>
+	<SPAN LANG="en-US">Protocol</SPAN>) &ndash; протокол парольной
+	аутентификации);</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>в
+	защищённом виде. Все передаваемые данные (идентификатор и пароль
+	пользователя, случайное число и метки времени) защищены посредством
+	шифрования.</FONT></FONT></P>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-left: 1.91cm; margin-bottom: 0cm; line-height: 100%">
+<BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; line-height: 100%"><IMG SRC="theory.authentication_2_html_26cc03a8.gif" NAME="Объект1" ALIGN=BOTTOM WIDTH=680 HEIGHT=268 BORDER=0>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><I>Рис.
+1. Схема простой аутентификации с использованием пароля</I></FONT></FONT></P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>где 
+<IMG SRC="theory.authentication_2_html_6ee672fb.gif" NAME="Объект2" ALIGN=ABSMIDDLE WIDTH=34 HEIGHT=27 BORDER=0>
+&ndash; средства шифрования и 
+<IMG SRC="theory.authentication_2_html_m40d41dab.gif" NAME="Объект3" ALIGN=ABSMIDDLE WIDTH=36 HEIGHT=27 BORDER=0>
+&ndash; расшифровывания;</FONT></FONT></P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<IMG SRC="theory.authentication_2_html_m1ef6e2c4.gif" NAME="Объект4" ALIGN=ABSMIDDLE WIDTH=36 HEIGHT=27 BORDER=0>
+&ndash; <FONT FACE="Times New Roman, serif"><FONT SIZE=4>пароль,
+введённый пользователем;</FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<IMG SRC="theory.authentication_2_html_654a4a1f.gif" NAME="Объект5" ALIGN=ABSMIDDLE WIDTH=40 HEIGHT=33 BORDER=0>
+&ndash; <FONT FACE="Times New Roman, serif"><FONT SIZE=4>исходное
+значение пароля, хранящегося на сервере аутентификации.</FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>Схемы простой
+аутентификации отличаются также видом хранения и проверки паролей:</FONT></FONT></P>
+<OL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>хранение
+	паролей пользователей о открытом виде в системных файлах, защищённых
+	от чтения и записи. Недостаток &ndash; возможность получения
+	злоумышленником в системе привилегий администратора;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>хранение
+	и передача хэш-функций от паролей пользователей (использование
+	односторонних функций). В этом случае гарантируется невозможность
+	раскрытия пароля по его отображению, так как злоумышленник
+	наталкивается на неразрешимую числовую задачу.</FONT></FONT></P>
+</OL>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>Вариант
+использования односторонней функции:</FONT></FONT></P>
+<P ALIGN=CENTER STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<IMG SRC="theory.authentication_2_html_m832bcde.gif" NAME="Объект6" ALIGN=ABSMIDDLE WIDTH=127 HEIGHT=28 BORDER=0><FONT FACE="Times New Roman, serif"><FONT SIZE=4>,</FONT></FONT></P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>где 
+<IMG SRC="theory.authentication_2_html_78ae1337.gif" NAME="Объект7" ALIGN=ABSMIDDLE WIDTH=27 HEIGHT=22 BORDER=0>
+&ndash; пароль пользователя;</FONT></FONT></P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<IMG SRC="theory.authentication_2_html_4559920e.gif" NAME="Объект8" ALIGN=ABSMIDDLE WIDTH=35 HEIGHT=22 BORDER=0>
+&ndash; <FONT FACE="Times New Roman, serif"><FONT SIZE=4>идентификатор
+пользователя;</FONT></FONT></P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<IMG SRC="theory.authentication_2_html_2c8cc3b9.gif" NAME="Объект9" ALIGN=ABSMIDDLE WIDTH=36 HEIGHT=27 BORDER=0>
+&ndash; <FONT FACE="Times New Roman, serif"><FONT SIZE=4>процедура
+шифрования, выполняемая с использованием пароля 
+<IMG SRC="theory.authentication_2_html_78ae1337.gif" NAME="Объект10" ALIGN=ABSMIDDLE WIDTH=27 HEIGHT=22 BORDER=0>
+в качестве ключа.</FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; line-height: 100%"><IMG SRC="theory.authentication_2_html_5a5bd21e.gif" NAME="Объект11" ALIGN=BOTTOM WIDTH=686 HEIGHT=498 BORDER=0></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><I>Рис.
+2. Вариант использования односторонней функции</I></FONT></FONT></P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<BR>
+</P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>К протоколам
+аутентификации на основе многоразовых паролей относятся:</FONT></FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><SPAN LANG="en-US">PAP</SPAN>
+	(<SPAN LANG="en-US">Password</SPAN> <SPAN LANG="en-US">Authentication</SPAN>
+	<SPAN LANG="en-US">Protocol</SPAN>)<SPAN LANG="en-US">;</SPAN></FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><SPAN LANG="en-US">CHAP
+	(Challenge&ndash;Handshake Authentication Protocol) &ndash; </SPAN>на
+	основе процедуры &ldquo;запрос&ndash;ответ&rdquo;<SPAN LANG="en-US">;</SPAN></FONT></FONT></P>
+	<LI><P LANG="en-US" STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>TACACS
+	(Terminal Access Controller Access Control System);</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><SPAN LANG="en-US">RADIUS</SPAN>
+	(<SPAN LANG="en-US">Remote</SPAN> <SPAN LANG="en-US">Authentication</SPAN>
+	<SPAN LANG="en-US">Dial</SPAN>&ndash;<SPAN LANG="en-US">In</SPAN>
+	<SPAN LANG="en-US">User</SPAN> <SPAN LANG="en-US">Service</SPAN>) &ndash;
+	протоколы централизованного контроля доступа к сети удалённых
+	пользователей.</FONT></FONT></P>
+</UL>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; font-weight: medium; line-height: 100%">
+<FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Недостатки:
+схемы аутентификации, основанные на традиционных многоразовых
+паролях, не обладают достаточной безопасностью. Такие пароли можно
+перехватить, разгадать, подсмотреть или украсть.</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Основные
+угрозы для подсистемы аутентификации</B></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>Существуют две
+основные угрозы для подсистемы аутентификации &ndash; кража пароля и
+подбор пароля. Для обеспечения надежной защиты от кражи паролей
+подсистема ОС должна удовлетворять следующим требованиям:</FONT></FONT></P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>пароль,
+	вводимый пользователем не отображается на экране компьютера;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>ввод
+	пароля в командной строке недопустим. </FONT></FONT>
+	</P>
+</UL>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>Кроме того
+пользователи ОС должны быть проинструктированы о:</FONT></FONT></P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>необходимости
+	хранения паролей в тайне от всех пользователей, а также
+	администраторов ОС;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>необходимости
+	немедленной смены пароля после его компрометации;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>необходимости
+	регулярной смены пароля;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>недопустимости
+	записи пароля на бумаге или в файл. </FONT></FONT>
+	</P>
+</UL>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<BR>
+</P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Методы подбора
+паролей:</B></FONT></FONT></P>
+<OL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><I>тотальный
+	перебор</I></FONT> &ndash; <FONT SIZE=4>в этом случае злоумышленник
+	последовательно опробует все возможные варианты пароля;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><I>тотальный
+	перебор, оптимизированный по статистике встречаемых символов</I></FONT>
+	&ndash; <FONT SIZE=4>злоумышленник вначале опробует пароли,
+	состоящие из наиболее часто встречающихся символов, за счет чего
+	время перебора значительно сокращается;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><I>тотальный
+	перебор, оптимизированный с помощью словарей</I></FONT> &ndash; <FONT SIZE=4>при
+	использовании данного метода злоумышленник вначале опробует в
+	качестве паролей все слова из словаря, содержащего наиболее
+	вероятный пароли;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>подбор
+	пароля с использованием знаний о пользователе.</FONT></FONT></P>
+</OL>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Защита
+от компрометации пароля</B></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>Будем говорить, что
+произошла </FONT><FONT SIZE=4><I>компрометация</I></FONT> <FONT SIZE=4>пароля,
+если пароль пользователя стал известен некоторому другому
+пользователю. </FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>Методы уменьшения
+угрозы компрометации пароля:</FONT></FONT></P>
+<OL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Ограничение
+	срока действия пароля. При применении данного метода каждый
+	пользователь обязан менять пароль через определенный интервал
+	времени.</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Ограничение
+	на содержание пароля: </FONT></FONT>
+	</P>
+</OL>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>длина
+	пароля должна быть не менее 10 символов;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>в
+	пароль должны входить цифры, строчные и заглавные символы (должен
+	быть сформирован случайным образом);</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>пароль
+	не должен присутствовать в списке &laquo;плохих паролей&raquo;.</FONT></FONT></P>
+</UL>
+<OL START=3>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Блокировка
+	терминала. В случае ошибочного ввода пароля некоторого количества
+	раз происходит блокирование терминала.</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Блокировка
+	пользователей. Аналогично предыдущему методу, только происходит
+	блокировка пользователей.</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Генерация
+	паролей операционной системой. В этом случае пароли генерируются
+	случайным образом, что крайне затрудняет подбор паролей.</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Пароль
+	и отзыв (запрос-ответ) &ndash; при использовании этой схемы
+	аутентификации при входе пользователя в систему ОС выдает ему
+	случайное число/строку, на которую пользователь должен дать
+	правильный отзыв;</FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Разовый
+	пароль. В этом случае пароль пользователя автоматически меняется
+	после каждого успешного входа в систему.</FONT></FONT></P>
+</OL>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<BR>
+</P>
+</BODY>
+</HTML>

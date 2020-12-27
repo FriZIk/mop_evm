@@ -1,0 +1,197 @@
+Turbo Assembler	 Version 3.1	    12/24/20 20:04:00	    Page 1
+lab3.asm
+
+
+
+      1				     ;Ввести с клавиатуры строку, состоящую из целых	    +
+      2				     чисел, разделенных
+      3				     ;пробелами. Найти количество чисел больших, чем	    +
+      4				     первое число строки.
+      5
+      6	0000			     model SMALL
+      7	0000			     stack 100h
+      8	0000			     dataseg
+      9
+     10	0000  0A 0D 56 76 65 64	69+  Ask db 0Ah,0Dh,'Vvedite stroku:','$'
+     11	      74 65 20 73 74 72	6F+
+     12	      6B 75 3A 24
+     13	0012  0A 0D 52 65 73 75	6C+  Answer db 0Ah,0Dh,	'Resultat:','$'
+     14	      74 61 74 3A 24
+     15	001E  00		     Counter db	0 ; Счетчик чисел меньше первого
+     16	001F  00		     Num db 0 ;	переменная общего назначения)
+     17	0020  50 ?? 52*(??)	     Inpstr db 80, ?, 82 dup( ?	) ; буфер ввода
+     18	0074  0A 0D ?? ?? 0D 0A	24   Outputstr db 0Ah, 0Dh, ?, ?, 0Dh, 0Ah, '$'
+     19
+     20	007B  9C		     max db -100;
+     21
+     22	007C			     codeseg
+     23				     startupcode
+1    24	0000			     @Startup:
+1    25	0000  BA 0000s			     MOV     DX,@data
+1    26	0003  8E DA			     MOV     DS,DX
+1    27	0005  8C D3			     MOV     BX,SS
+1    28	0007  2B DA			     SUB     BX,DX
+1    29	0009  D1 E3 D1 E3 D1 E3	D1+	     SHL     BX,4
+     30	      E3
+1    31	0011  FA			     CLI
+1    32	0012  8E D2			     MOV     SS,DX
+1    33	0014  03 E3			     ADD     SP,BX
+1    34	0016  FB			     STI
+     35	0017			     Begin:
+     36	0017  BA 0000r			 lea DX, Ask
+     37	001A  B4 09			 mov AH, 09h
+     38	001C  CD 21			 int 21h
+     39	001E  BA 0020r			 lea DX, Inpstr
+     40	0021  B4 0A			 mov AH, 0Ah
+     41	0023  CD 21			 int 21h
+     42					 ;Обработка
+     43	0025  BB 0022r			 lea BX, Inpstr+2 ;адрес начала введенной строки
+     44	0028  8A 0E 0021r		 mov CL, Inpstr+1 ;кол-во введенных символов строки
+     45	002C  EB 0D 90			 jmp Сycle0
+     46
+     47	002F			     Mult:
+     48					 ; Формируем число поразрядно
+     49	002F  B0 0A			 mov AL, 10;
+     50	0031  F6 26 001Fr		 mul Num
+     51	0035  A2 001Fr			 mov Num, AL
+     52	0038  EB 0F 90			 jmp Cycle1
+     53
+     54	003B			     Сycle0:
+     55	003B  8A 07			 mov AL, [BX];
+     56	003D  80 C3 01			 add BL, 1
+     57	0040  3C 20			 cmp AL, ' '
+Turbo Assembler	 Version 3.1	    12/24/20 20:04:00	    Page 2
+lab3.asm
+
+
+
+     58	0042  74 0C			     je	NC
+     59
+     60					 ;Если всё таки цифра
+     61	0044  2C 30			 sub AL, '0'
+     62	0046  50			 push AX
+     63	0047  EB E6			 jmp Mult
+     64
+     65	0049			     Cycle1:
+     66	0049  58			 pop AX
+     67	004A  00 06 001Fr		 add Num, AL;
+     68	004E  E2 EB		     loop Сycle0
+     69
+     70	0050			     NC:
+     71	0050  80 3E 001Fr 00		 cmp Num,0
+     72	0055  74 28			 je NC1
+     73
+     74					 ; Если это первое	число в массиве то устанавливаем
+     75	0057  80 3E 007Br 9C		 cmp max,-100
+     76					 ;cmp CL, Inpstr+1 ; это рабоатет ТОЛЬКО для однозначных	    +
+     77				     чисел
+     78	005C  75 09			 jnz SRAV
+     79					 ; записываем	первое число	массива в max
+     80	005E  A0 001Fr			 mov AL, Num
+     81	0061  A2 007Br			 mov max, AL
+     82	0064  EB 14 90			 jmp Clear
+     83
+     84	0067			     SRAV:
+     85					 ; Сравниваем	текущее число с первым
+     86	0067  A0 007Br			 mov AL,max
+     87
+     88	006A  38 06 001Fr		 cmp Num,AL;
+     89	006E  78 0A			 js Clear;результат <0
+     90	0070  38 06 001Fr		 cmp Num,AL;
+     91	0074  74 04			 jz Clear;результат равен	0
+     92	0076  FE 06 001Er		 inc Counter;
+     93
+     94	007A			     Clear:
+     95	007A  C6 06 001Fr 00		 mov Num, 0
+     96
+     97	007F			     NC1:
+     98					 ; Если символы в строке кончились, то печататем	    +
+     99				     результат
+    100					 ; иначе продолжаем цикл
+    101	007F  80 F9 00			 cmp CL, 0
+    102	0082  74 02			     je	Print
+    103	0084  E2 B5			     loop Сycle0
+    104
+    105	0086			     Print:
+    106	0086  BA 0012r			 lea DX, Answer
+    107	0089  B4 09			 mov AH, 09h
+    108	008B  CD 21			 int 21h
+    109
+    110	008D  33 C0			     xor AX, AX
+    111	008F  A0 001Er			     mov AL, Counter
+    112	0092  B3 0A			     mov BL, 10
+    113	0094  F6 F3			     div BL
+    114	0096  80 C4 30			     add AH, '0'
+Turbo Assembler	 Version 3.1	    12/24/20 20:04:00	    Page 3
+lab3.asm
+
+
+
+    115	0099  04 30			     add AL, '0'
+    116	009B  3C 00			     cmp AL, 0
+    117	009D  A2 0076r			     mov Outputstr+2, AL
+    118	00A0  88 26 0077r		     mov Outputstr+3, AH
+    119
+    120	00A4  BA 0074r			     lea DX, Outputstr
+    121	00A7  B4 09			     mov AH, 09h
+    122	00A9  CD 21			     int 21h
+    123				     ; В массив вывода переносим два байта с первой и	    +
+    124				     второй цифрой счетчика
+    125				     ; Вызываем	прерывание 21h для	вывода в	консоль буфера +
+    126				     вывода
+    127
+    128	00AB			     QUIT:
+    129					 exitcode 0
+1   130	00AB  B8 4C00			     MOV     AX,04C00h
+1   131	00AE  CD 21			     INT     21h
+    132				     end
+Turbo Assembler	 Version 3.1	    12/24/20 20:04:00	    Page 4
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "12/24/20"
+??FILENAME			  Text	 "lab3	  "
+??TIME				  Text	 "20:04:00"
+??VERSION			  Number 030A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB3
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 _TEXT:0000
+@WORDSIZE			  Text	 2
+ANSWER				  Byte	 DGROUP:0012
+ASK				  Byte	 DGROUP:0000
+BEGIN				  Near	 _TEXT:0017
+CLEAR				  Near	 _TEXT:007A
+COUNTER				  Byte	 DGROUP:001E
+CYCLE1				  Near	 _TEXT:0049
+INPSTR				  Byte	 DGROUP:0020
+MAX				  Byte	 DGROUP:007B
+MULT				  Near	 _TEXT:002F
+NC				  Near	 _TEXT:0050
+NC1				  Near	 _TEXT:007F
+NUM				  Byte	 DGROUP:001F
+OUTPUTSTR			  Byte	 DGROUP:0074
+PRINT				  Near	 _TEXT:0086
+QUIT				  Near	 _TEXT:00AB
+SRAV				  Near	 _TEXT:0067
+YCLE0				  Near	 _TEXT:003B
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  007C Word	  Public  DATA
+_TEXT				  16  00B0 Word	  Public  CODE
+

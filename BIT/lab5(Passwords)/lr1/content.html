@@ -1,0 +1,274 @@
+<html>
+<head>
+	<title>Содержание</title>
+<script LANGUAGE="JavaScript">
+<!--
+var total=1;
+var db = new Array();
+
+// -- Enter Values Here --
+// Format: dbAdd(parent[true|false] , description, URL [blank for nohref], level , TARGET [blank for "content"], new? [1=yes])
+
+
+dbAdd( false , "Первая страница" , "texts/titul.html" , 0 , "" , 0)
+//dbAdd( false , "Комплексная цель" , "texts/targets.html" , 0 , "" , 3)
+//dbAdd( true  , "Учебно-методическая информация" , "" , 0 , "" , 0)
+//  dbAdd( false , "Рейтинговая система" , "texts/rating.html" , 1 , "" , 0)
+//  dbAdd( false , "Междисциплинарные связи учебной дисциплины «Культурология»" , "texts/kulturology.html" , 1 , "" , 0)
+//dbAdd( false , "Библиографические сведения" , "texts/biblio.html" , 0 , "" , 0)
+dbAdd( true  , "Содержание" , "" , 0 , "" , 0)
+  dbAdd( false , "Введение" , "texts/intro.html" , 1 , "" , 0)
+  dbAdd( true , "1. Теоретическая часть" , "" , 1 , "" , 0)
+    dbAdd( false , "1.1. Основные определения и классификация" , "texts/theory.base.html" , 2 , "" , 0)
+    dbAdd( false , "1.2. Основные характеристики протоколов аутентификации" , "texts/theory.authentication_0.html" , 2 , "" , 0)
+    dbAdd( false , "1.3. Аутентификация на основе многоразовых паролей" , "texts/theory.authentication.html" , 2 , "" , 0)
+//    dbAdd( false , "1.4. Строгая аутентификация" , "texts/theory.strong_authentication.html" , 2 , "" , 0)
+//    dbAdd( false , "1.5. Протоколы аутентификации на основе хэш-функций" , "texts/theory.authentication_with_hash.html" , 2 , "" , 0)
+//	dbAdd( false , "1.4. Основные методы шифрования" , "texts/theory.ciphering_methods.html" , 2 , "" , 0)
+//    dbAdd( false , "1.5. Стойкость, обеспечиваемая современными шифрами" , "texts/theory.ciphers_security.html" , 2 , "" , 0)
+//    dbAdd( false , "1.6. Причины ненадежности криптографических систем" , "texts/theory.ciphers_weaknesses.html" , 2 , "" , 0)
+
+  dbAdd( true , "2. Описание используемых технологий и программных продуктов" , "" , 1 , "" , 0)
+    dbAdd( false , "2.1. Описание хэш-функции MD5" , "texts/md5.description.html" , 2 , "" , 0)
+    dbAdd( false , "2.2. Описание метода Rainbow-таблиц" , "texts/rainbow.description.html" , 2 , "" , 0)
+    dbAdd( false , "2.3. Описание Rainbow_crack" , "texts/Rainbow_crack.description.html" , 2 , "" , 0)
+    dbAdd( false , "2.4. Описание Ophcrack" , "texts/Ophcrack.description.html" , 2 , "" , 0)
+  
+  dbAdd( true , "3. Пошаговая инструкция по работе с программными продуктами" , "" , 1 , "" , 0)
+    dbAdd( false , "3.1. Порядок работы с формирователем хэшей DAMN Hash Calculator" , "texts/DAMN.usage.html" , 2 , "" , 0)
+//    dbAdd( false , "3.2. Порядок работы с BruteHash" , "texts/BruteHash.usage.html" , 2 , "" , 0)
+    dbAdd( false , "3.2. Порядок работы с Rainbow_crack" , "texts/Rainbow_crack.usage.html" , 2 , "" , 0)
+    dbAdd( false , "3.3. Порядок работы с Ophcrack" , "texts/Ophcrack.usage.html" , 2 , "" , 0)
+
+  dbAdd( true , "4. Обучающие видеоролики" , "" , 1 , "" , 0)
+//    dbAdd( false , "4.1. Видеоролик, показывающий работу с DAMN Hash Calculator" , "video/part1.exe" , 2 , "" , 0)
+//    dbAdd( false , "4.2. Видеоролик, показывающий работу с BruteHash" , "video/part2.exe" , 2 , "" , 0)
+//    dbAdd( false , "4.3. Видеоролик, показывающий работу с Rainbow_crack" , "video/part3.exe" , 2 , "" , 0)
+    dbAdd( false , "4.1. Видеоролик, показывающий работу с Ophcrack" , "video/part3.exe" , 2 , "" , 0)
+	
+
+  dbAdd( true , "5. Справочные и другие материалы" , "" , 1 , "" , 0)
+//    dbAdd( false , "5.1. Где NT хранит пароли" , "texts/dop.win2000_sam.html" , 2 , "" , 0)
+//    dbAdd( false , "5.2. Листинг хэш-функции MD5" , "texts/source.md5.html" , 2 , "" , 0)
+    dbAdd( false , "5.1. Радужная таблица для SHA1, полученная в п.3.2" , "data/sha1_loweralpha-numeric_1-6_0_2400x1000000_laba.rt" , 2 , "" , 0)
+    dbAdd( false , "5.2. Радужная таблица для MD5, полученная в п.3.2" , "data/md5_loweralpha-numeric_1-6_0_2400x1000000_laba.rt" , 2 , "" , 0)
+    dbAdd( false , "5.3. Используемые программы" , "data/progs/" , 2 , "" , 0)
+	
+//    dbAdd( false , "5.3. Описание эксплойта для антивируса Symantec" , "texts/symantec_rtvscan.exploit.html" , 2 , "" , 0)
+//    dbAdd( false , "5.4. Описание эксплойта для игры UT2004" , "texts/ut2004_secure.exploit.html" , 2 , "" , 0)
+//    dbAdd( false , "5.5. Результаты выполнения команды autoscan программы Inguma" , "texts/Inguma.report.html" , 2 , "" , 0)
+//    dbAdd( false , "5.6. Результаты выполнения сканера безопасности Nessus" , "texts/Nessus.report.html" , 2 , "" , 0)
+	
+
+ dbAdd( false , "Литература" , "texts/literature.html" , 1 , "" , 0)
+
+ dbAdd( true , "Задание на лабораторную работу" , "" , 0 , "" , 0)
+   dbAdd( false , "Вариант 1" , "zadania/variant_1.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 2" , "zadania/variant_2.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 3" , "zadania/variant_3.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 4" , "zadania/variant_4.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 5" , "zadania/variant_5.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 6" , "zadania/variant_6.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 7" , "zadania/variant_7.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 8" , "zadania/variant_8.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 9" , "zadania/variant_9.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 10" , "zadania/variant_10.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 11" , "zadania/variant_11.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 12" , "zadania/variant_12.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 13" , "zadania/variant_13.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 14" , "zadania/variant_14.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 15" , "zadania/variant_15.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 16" , "zadania/variant_16.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 17" , "zadania/variant_17.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 18" , "zadania/variant_18.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 19" , "zadania/variant_19.html" , 1 , "" , 0)
+   dbAdd( false , "Вариант 20" , "zadania/variant_20.html" , 1 , "" , 0)
+   
+
+//dbAdd( true , "Задания" , "" , 0 , "" , 0)
+//  dbAdd( true , "Вариант 1." , "" , 1 , "" , 0)
+//    dbAdd( false , "изображение 1" , "gallery/part_1/image_1.tif" , 2 , "" , 4)
+		
+
+// dbAdd( false , "" , "" , 0 , "" , 0)
+
+// -- End modifications --
+
+// Get current cookie setting
+var current=getCurrState()
+function getCurrState() {
+  var label = "currState="
+  var labelLen = label.length
+  var cLen = document.cookie.length
+  var i = 0
+  while (i < cLen) {
+    var j = i + labelLen
+    if (document.cookie.substring(i,j) == label) {
+      var cEnd = document.cookie.indexOf(";",j)
+      if (cEnd == -1) { cEnd = document.cookie.length }
+      return unescape(document.cookie.substring(j,cEnd))
+    }
+    i++
+  }
+  return ""
+}
+
+// Add an entry to the database
+function dbAdd(mother,display,URL,indent,top,newitem) {
+  db[total] = new Object;
+  db[total].mother = mother
+  db[total].display = display
+  db[total].URL = URL
+  db[total].indent = indent
+  db[total].top = top
+  db[total].newitem = newitem
+  total++
+  }
+
+// Record current settings in cookie
+function setCurrState(setting) {
+  var expire = new Date();
+  expire.setTime(expire.getTime() + ( 7*24*60*60*1000 ) ); // expire in 1 week
+  document.cookie = "currState=" + escape(setting) + "; expires=" + expire.toGMTString();
+  }
+
+// toggles an outline mother entry, storing new value in the cookie
+function toggle(n) {
+  if (n != 0) {
+    var newString = ""
+    var expanded = current.substring(n-1,n) // of clicked item
+    newString += current.substring(0,n-1)
+    newString += expanded ^ 1 // Bitwise XOR clicked item
+    newString += current.substring(n,current.length)
+    setCurrState(newString) // write new state back to cookie
+  }
+}
+
+// returns padded spaces (in mulTIPles of 2) for indenting
+function pad(n) {
+  var result = ""
+  for (var i = 1; i <= n; i++) { result += "&nbsp;&nbsp;&nbsp;&nbsp;" }
+  return result
+}
+
+// Expand everything
+function explode() {
+  current = "";
+  initState="";
+  for (var i = 1; i < db.length; i++) { 
+    initState += "1"
+    current += "1"
+    }
+  setCurrState(initState);
+  history.go(0);
+  }
+
+// Collapse everything
+function contract() {
+  current = "";
+  initState="";
+  for (var i = 1; i < db.length; i++) { 
+    initState += "0"
+    current += "0"
+    }
+  setCurrState(initState);
+  history.go(0);
+  }
+
+function tree_close() {
+  window.parent.location = window.parent.content.location;
+  }
+
+// end -->
+
+
+</script>
+</HEAD>
+
+<BODY bgcolor=#ffffff LINK="#006666" VLINK="#004444">
+<table border=0 width=500>
+<tr><td>
+<font size="-1">
+
+<script LANGUAGE="JavaScript">
+<!--
+// Set the initial state if no current state or length changed
+if (current == "" || current.length != (db.length-1)) {
+  current = ""
+  initState = ""
+  for (i = 1; i < db.length; i++) { 
+    initState += "0"
+    current += "0"
+    }
+  setCurrState(initState)
+  }
+var prevIndentDisplayed = 0
+var showMyDaughter = 0
+// end -->
+ 
+<!--
+var Outline=""
+// cycle through each entry in the outline array
+for (var i = 1; i < db.length; i++) {
+  var currIndent = db[i].indent           // get the indent level
+  var expanded = current.substring(i-1,i) // current state
+  var top_frame = db[i].top
+  if (top_frame == "") { top_frame="content" }
+  // display entry only if it meets one of three criteria
+  if ((currIndent == 0 || currIndent <= prevIndentDisplayed || (showMyDaughter == 1 && (currIndent - prevIndentDisplayed == 1)))) {
+  Outline += pad(currIndent)
+
+  // Insert the appropriate GIF and HREF
+  newitem = "";
+  if (db[i].newitem==1) { newitem="_new"; }
+  if (db[i].newitem==2) { newitem="_quest"; }
+  if (db[i].newitem==3) { newitem="_target"; }
+  if (db[i].newitem==4) { newitem="_project"; }
+  
+  if (!(db[i].mother)) {
+    Outline += "<IMG SRC=\"images/blank.gif\" WIDTH=16 HEIGHT=16 BORDER=0><IMG SRC=\"images/document" + newitem + ".gif\" WIDTH=16 HEIGHT=16 BORDER=0>"
+    } 
+  else { 
+      if (current.substring(i-1,i) == 1) {
+        Outline += "<A HREF=\"javascript:history.go(0)\" onMouseOver=\"window.parent.status=\'Click to collapse\';return true;\" onClick=\"toggle(" + i + ")\">"
+        Outline += "<IMG SRC=\"images/minus.gif\" WIDTH=16 HEIGHT=16 BORDER=0><IMG SRC=\"images/open" + newitem + ".gif\" WIDTH=16 HEIGHT=16 BORDER=0>"
+        Outline += "</A>"
+        }
+      else {
+	    Outline += "<A HREF=\"javascript:history.go(0)\" onMouseOver=\"window.parent.status=\'Click to expand\';return true;\" onClick=\"toggle(" + i + ")\">"
+        Outline += "<IMG SRC=\"images/plus.gif\" WIDTH=16 HEIGHT=16 BORDER=0><IMG SRC=\"images/closed" + newitem + ".gif\" WIDTH=16 HEIGHT=16 BORDER=0>"
+        Outline += "</A>"
+        }
+      }
+    Outline += "&nbsp;";
+     
+    if (db[i].URL == "" || db[i].URL == null) {
+      Outline += " " + db[i].display      // no link, just a listed item  
+      }
+    else {
+      Outline += " <A HREF=\"" + db[i].URL + "\" TARGET=\"" + top_frame + "\">" + db[i].display + "</A>"
+      }
+	// Bold if at level 0
+    if (currIndent == 0) { 
+      Outline = "<B>" + Outline + "</B>"
+      }
+    Outline += "<BR>"
+    prevIndentDisplayed = currIndent
+    showMyDaughter = expanded
+    // if (i == 1) { Outline = ""}
+    if (db.length > 25) {
+      document.write(Outline)
+      Outline = ""
+      }
+    }
+  }
+document.write(Outline)
+// end -->
+</script>
+
+</font>
+</td></tr>
+</table>
+
+</BODY>
+</HTML>

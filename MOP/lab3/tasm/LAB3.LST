@@ -1,0 +1,88 @@
+Turbo Assembler	 Version 3.1	    12/24/20 03:03:23	    Page 1
+lab3.asm
+
+
+
+      1				     ;Дан массив из 10 байтов.	Посчитать количество		    +
+      2				     байтов, в которых
+      3				     ;сброшены 6 и 4 биты.
+      4
+      5	0000			     model SMALL
+      6	0000			     stack 100h
+      7	0000			     dataseg
+      8	0000  ????		     count dw ?; количество элементов
+      9	0002  F1 01 D8 03 50 05	55+  MB	db 0F1h,1h,0D8h,3h,50h,5h,55h,7h,0h,2Ah
+     10	      07 00 2A
+     11
+     12	000C				 codeseg
+     13					 startupcode
+1    14	0000			     @Startup:
+1    15	0000  BA 0000s			     MOV     DX,@data
+1    16	0003  8E DA			     MOV     DS,DX
+1    17	0005  8C D3			     MOV     BX,SS
+1    18	0007  2B DA			     SUB     BX,DX
+1    19	0009  D1 E3 D1 E3 D1 E3	D1+	     SHL     BX,4
+     20	      E3
+1    21	0011  FA			     CLI
+1    22	0012  8E D2			     MOV     SS,DX
+1    23	0014  03 E3			     ADD     SP,BX
+1    24	0016  FB			     STI
+     25
+     26	0017  BB 0002r			 lea BX, MB
+     27	001A  B9 000A			 mov CX, 10
+     28	001D  33 D2			 xor DX, DX
+     29
+     30	001F			     BEG:
+     31	001F  8A 07			 mov AL,[BX];
+     32	0021  A8 50			 test AL, 01010000b
+     33	0023  75 01			 jnz NO	; биты 4 и	6 установлены
+     34	0025  42			 inc DX	; иначе увличиваем счётчик
+     35	0026			     NO:
+     36	0026  43			 inc BX;
+     37	0027  E2 F6			 loop BEG;
+     38				     ; Конец цикла
+     39
+     40	0029  89 16 0000r	     mov count,DX;
+     41
+     42	002D			     QUIT: exitcode 0
+1    43	002D  B8 4C00			     MOV     AX,04C00h
+1    44	0030  CD 21			     INT     21h
+     45				     end
+Turbo Assembler	 Version 3.1	    12/24/20 03:03:23	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "12/24/20"
+??FILENAME			  Text	 "lab3	  "
+??TIME				  Text	 "03:03:23"
+??VERSION			  Number 030A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB3
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 _TEXT:0000
+@WORDSIZE			  Text	 2
+BEG				  Near	 _TEXT:001F
+COUNT				  Word	 DGROUP:0000
+MB				  Byte	 DGROUP:0002
+NO				  Near	 _TEXT:0026
+QUIT				  Near	 _TEXT:002D
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  000C Word	  Public  DATA
+_TEXT				  16  0032 Word	  Public  CODE
+

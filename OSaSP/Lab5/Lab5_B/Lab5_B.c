@@ -1,55 +1,45 @@
-// Lab5_B.c : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include "windows.h"
 #include <stdlib.h>
 #include <locale.h>
 
-#pragma warning(disable: 4996)
-
-int _tmain(int argc, _TCHAR* argv[])
+int main(void)
 {
-	char *strReceived;
-	HANDLE hMapping, hReceivedEvent, hAnswerEvent;
+	int* arrayReceived;
+	int* triger;
+	HANDLE hMapping, hReceivedEvent, hAnswerEvent, hStopEvent;
 
-	// Открытие объекта "отображение файла" и создание представления strReceived
 	hMapping = OpenFileMapping(FILE_MAP_WRITE, FALSE, _T("Lab5_Mapping"));
-	strReceived = MapViewOfFile(hMapping, FILE_MAP_WRITE, 0, 0, 250);
+	arrayReceived = MapViewOfFile(hMapping, FILE_MAP_WRITE, 0, 0, 250);
+	triger = MapViewOfFile(hMapping, FILE_MAP_WRITE, 0, 0, 2);
+	hReceivedEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, _T("Lab5"));
+	hAnswerEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, _T("Lab5"));
+	
+	SetConsoleCP(1251);			
+	SetConsoleOutputCP(1251);	
 
-	// Открытие событий для синхронизации обмена с процессом A
-	hReceivedEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, _T("Lab5_SentEvent"));
-	hAnswerEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, _T("Lab5_AnswEvent"));
-
-	// Корректный вывод кириллицы
-	setlocale(LC_ALL,"Rus");
-
-	// Начальная очистка "мусора" в канале и сброс буфера
 	puts("");
 	fflush(stdout);
-	// Извещение для процесса A: прими мусор
+
 	SetEvent(hAnswerEvent);
 
-	// Основной цикл приема/посылки данных
 	do {
-		// Ожидание готовности данных в представлении strReceived
+		int choose = 1;
 		WaitForSingleObject(hReceivedEvent, INFINITE);
+		printf("Получено от A:");
+		for(int i = 4;i >= 0;i--)
+			printf("%d ", arrayReceived[i]);
+		printf("\nПрододжить выполение?(1/0):");
+		scanf("%d", &choose);
+		triger[0] = choose;
+		SetEvent(hAnswerEvent);
+	} while (triger[0] == 1);
 
-		// Вывод на stderr, потому что stdout перенаправлен в канал
-		fprintf(stderr, "Получено от A: %s\n", strReceived);
-		if (strcmp(strReceived, "")) {
-			strcat(strReceived, " : Process B");
-		}
-		// вывод в канал и сброс буфера
-		puts(strReceived);
-		fflush(stdout);
-	} while (strcmp(strReceived, ""));
+	SetEvent(hAnswerEvent);
+	UnmapViewOfFile(arrayReceived);
 
-	// Закрытие представления strReceived
-	UnmapViewOfFile(strReceived);
-
-	// Закрытие хэндла объекта
 	CloseHandle(hMapping);
+
 	return 0;
 }
 

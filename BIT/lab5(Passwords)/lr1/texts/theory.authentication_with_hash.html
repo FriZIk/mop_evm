@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080924;1074228">
+	<META NAME="CHANGED" CONTENT="20080924;1093101">
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<P STYLE="margin-top: 0.42cm; font-style: normal; page-break-after: avoid">
+<FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>Протоколы
+аутентификации, основанные на использовании однонаправленных ключевых
+хэш-функций</B></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">Протоколы,
+представленные выше, могут быть модифицированы путем замены
+симметричного шифрования на шифрование с помощью односторонней
+ключевой хэш-функции. Это бывает необходимо, если алгоритмы блочного
+шифро&shy;вания недоступны или не отвечают предъявляемым требованиям
+(например, в слу&shy;чае экспортных ограничений).</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">Своеобразие
+шифрования с помощью односторонней хэш-функции заключа&shy;ется в
+том, что оно, по существу, является односторонним, то есть не
+сопровожда&shy;ется обратным преобразованием &ndash; расшифрованием
+на приемной стороне. Обе стороны (отправитель и получатель)
+используют одну и ту же процедуру одно&shy;стороннего шифрования.</FONT></FONT></FONT></P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">Односторонняя
+хэш-функция </FONT><FONT COLOR="#000000"><SPAN LANG="en-US"><I>h</I></SPAN></FONT><FONT COLOR="#000000"><SUB><SPAN LANG="en-US"><I>K</I></SPAN></SUB></FONT><FONT COLOR="#000000">
+(.) с параметром-ключом </FONT><FONT COLOR="#000000"><I>К</I></FONT><FONT COLOR="#000000">,
+примененная к шифруемым данным </FONT><FONT COLOR="#000000"><I>М</I></FONT><FONT COLOR="#000000">,
+дает в результате хэш-значение </FONT><FONT COLOR="#000000"><SPAN LANG="en-US"><I>m</I></SPAN></FONT><FONT COLOR="#000000">
+(дайджест), состоя&shy;щее из фиксированного небольшого числа байтов
+(рис. 4.4).</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; line-height: 100%"><IMG SRC="theory.authentication_with_hash_html_m5458f0be.png" NAME="Графический объект1" ALIGN=BOTTOM WIDTH=724 HEIGHT=268 BORDER=0></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000"><I>Рис.
+4.3. </I></FONT><FONT COLOR="#000000"><I>Применение для
+аутентификации односторонней хэш-функции с параметром-ключом</I></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">Дайджест
+</FONT>
+<IMG SRC="theory.authentication_with_hash_html_8bd9732.gif" NAME="Объект27" ALIGN=ABSMIDDLE WIDTH=101 HEIGHT=27><FONT COLOR="#000000">
+передается получателю вместе с исходным сообщением </FONT><FONT COLOR="#000000"><I>М</I></FONT><FONT COLOR="#000000">.
+Получатель сообщения, зная, какая односторонняя хэш-функция была
+применена для получения дайджеста, заново вычисляет ее, используя
+сооб&shy;щение </FONT><FONT COLOR="#000000"><I>М</I></FONT><FONT COLOR="#000000">.
+Если значения полученного дайджеста </FONT><FONT COLOR="#000000"><SPAN LANG="en-US"><I>m</I></SPAN></FONT><FONT COLOR="#000000">
+и вычисленного дайджеста </FONT><FONT COLOR="#000000"><SPAN LANG="en-US"><I>m</I></SPAN></FONT><FONT COLOR="#000000">'
+совпадают, значит, содержимое сообщения </FONT><FONT COLOR="#000000"><I>М</I></FONT><FONT COLOR="#000000">
+не было подвергнуто никаким из&shy;менениям.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">Знание
+дайджеста не дает возможности восстановить исходное сообщение, но
+позволяет проверить целостность данных. Дайджест представляет собой
+криптографически стойкую контрольную сумму для исходного сообщения.
+Следовательно, между дай&shy;джестом и обычной контрольной суммой
+имеется существенное различие. Кон&shy;трольную сумму используют как
+средство проверки целостности передаваемых сообщений по ненадежным
+линиям связи. Это средство проверки не рассчитано на борьбу со
+злоумышленниками, которым в такой ситуации ничто не мешает подменить
+сообщение, добавив к нему новое значение контрольной суммы.
+По&shy;лучатель в таком случае не заметит никакой подмены.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">В
+отличие от обычной контрольной суммы, при вычислении дайджеста
+приме&shy;няются секретные ключи. В случае, если для получения
+дайджеста используется односторонняя хэш-функция с параметром-ключом
+</FONT><FONT COLOR="#000000"><I>К</I></FONT><FONT COLOR="#000000">,
+который известен только отправителю и получателю, любая модификация
+исходного сообщения будет не&shy;медленно обнаружена.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">При
+использовании для аутентификации односторонних функций шифрова&shy;ния
+в рассмотренные выше протоколы необходимо внести следующие изменения:</FONT></FONT></FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+	<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">функция
+	симметричного шифрования </FONT>
+	<IMG SRC="theory.authentication_with_hash_html_227fc476.gif" NAME="Объект28" ALIGN=ABSMIDDLE WIDTH=57 HEIGHT=27><FONT COLOR="#000000">
+	заменяется функцией </FONT>
+	<IMG SRC="theory.authentication_with_hash_html_1c1ed980.gif" NAME="Объект29" ALIGN=ABSMIDDLE WIDTH=53 HEIGHT=27><FONT COLOR="#000000">;</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+	<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">проверяющий,
+	вместо установления факта совпадения значений в полях в
+	расшифрованных сообщениях с предполагаемыми значениями, вычисляет
+	значение однонаправленной функции и сравнивает его с полученным от
+	другого участника обмена информацией;</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+	<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">для
+	обеспечения возможности независимого вычисления значения
+	однона&shy;правленной функции получателем сообщения в протоколе 1
+	метка време&shy;ни </FONT>
+	<IMG SRC="theory.authentication_with_hash_html_722df3ff.gif" NAME="Объект30" ALIGN=ABSMIDDLE WIDTH=28 HEIGHT=27><FONT COLOR="#000000">
+	должна передаваться дополнительно в открытом виде, а в сообщении (2)
+	протокола 3 случайное число </FONT>
+	<IMG SRC="theory.authentication_with_hash_html_1182a7b1.gif" NAME="Объект31" ALIGN=ABSMIDDLE WIDTH=31 HEIGHT=27><FONT COLOR="#000000">
+	должно передаваться дополнительно в от&shy;крытом виде.</FONT></FONT></FONT></P>
+</UL>
+<P ALIGN=JUSTIFY STYLE="text-indent: 1.27cm; margin-bottom: 0cm; background: #ffffff; line-height: 100%">
+<FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Модифицированный
+вариант протокола 3 с учетом сформулированных изме&shy;нений имеет
+следующую структуру:</FONT></FONT></FONT></P>
+<P ALIGN=RIGHT STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<IMG SRC="theory.authentication_with_hash_html_m68bb1f4a.gif" NAME="Объект32" ALIGN=ABSMIDDLE WIDTH=91 HEIGHT=27>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>							(1)</FONT></FONT></P>
+<P ALIGN=RIGHT STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<IMG SRC="theory.authentication_with_hash_html_m67fc327a.gif" NAME="Объект33" ALIGN=ABSMIDDLE WIDTH=217 HEIGHT=29>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4>					(2)</FONT></FONT></P>
+<P ALIGN=RIGHT STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<IMG SRC="theory.authentication_with_hash_html_3743ec11.gif" NAME="Объект34" ALIGN=ABSMIDDLE WIDTH=182 HEIGHT=29><FONT FACE="Times New Roman, serif"><FONT SIZE=4>					(3)</FONT></FONT></P>
+<P STYLE="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><FONT COLOR="#000000">Заметим,
+что в третье сообщение протокола включено поле А. Результирующий
+протокол обеспечивает взаимную аутентификацию и известен как протокол
+</FONT><FONT COLOR="#000000"><SPAN LANG="en-US">SKID</SPAN></FONT><FONT COLOR="#000000">
+3.</FONT></FONT></FONT></P>
+</BODY>
+</HTML>

@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080924;154575">
+	<META NAME="CHANGED" CONTENT="20080929;375868">
+	<STYLE TYPE="text/css">
+	<!--
+		P { margin-bottom: 0.21cm }
+		H1 { margin-bottom: 0.21cm }
+		H1.western { font-family: "Arial", sans-serif; font-size: 16pt }
+		H1.cjk { font-size: 16pt }
+		H1.ctl { font-size: 16pt }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<H1 CLASS="western"><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 16pt">2.3.
+Описание RainbowCrack</FONT></FONT></FONT></H1>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>RainbowCrack
+является инструментом для восстановления по хэшам исходных открытых
+сообщений, в роли которых нередко выступают пароли пользователей.
+Тогда как традиционные методы силового восстановления подразумевают
+последовательный перебор исходных открытых сообщений с последующим
+сравнением полученных хэшей, RainbowCrack работает другим способом.
+Он осуществляет особым образом предварительное вычисление всех
+возможных пар &laquo;открытый текст &mdash; зашифрованный текст&raquo;
+и сохраняет их в файле, называемом &quot;rainbow table&quot;.
+Предвычисление таких таблиц занимает длительное время, но по
+завершении этих предвычислений появляется возможность восстановить
+открытое сообщение (пароль) в течении секунд. Таким образом
+осуществляется &laquo;размен время &mdash; память&raquo;.</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>RainbowCrack
+поддерживает работу с несколькими хэш-функциями: md5, sha1 и др.
+Неподдерживаемые хэш-функции можно достаточно легко добавить самому,
+так как данная программа имеет открытые исходные коды. </FONT></FONT>
+</P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>RainbowCrack
+работает как под управлением ОС Windows, так и ОС Линукс. Самое
+главное, в состав программы включена утилита для генерации
+rainbow-таблиц, что позволяет формировать таблицы для различных
+наборов символов, например, для русского языка и т.д. </FONT></FONT>
+</P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4><SPAN STYLE="font-weight: medium">Разработчиками
+программы пр</SPAN>едлагается несколько готовых конфигурация для
+rainbow-таблиц.</FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=2 CELLSPACING=0>
+	<TR>
+		<TD COLSPAN=2 WIDTH=100%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Конфигурация
+			#0</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Хэш алгоритм</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>lm</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Набор символов</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>alpha
+			(ABCDEFGHIJKLMNOPQRSTUVWXYZ)</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Диапазон длин
+			открытых сообщений</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>1 - 7</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Объём
+			пространства ключа</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>26^1 + 26^2 +
+			26^3 + 26^4 + 26^5 + 26^6 + 26^7 = 8353082582</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>t</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>2100</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>m</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>8000000</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>l</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>5</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Использование
+			диска</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>m * 16 * l =
+			640000000 B = 610 MB</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Вероятность
+			успеха</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>0.9990</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Среднее время
+			криптоанализа</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>3.7841 s</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Среднее время
+			криптоанализа на системах с малым объёмом памяти (свободной памяти
+			менее, чем 122MB)</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61% VALIGN=TOP>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>8.2836 s</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Максимальное
+			время криптоанализа</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>31.1441 s</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39% VALIGN=TOP>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Команды,
+			используемые для предвычисления таблиц </FONT></FONT>
+			</P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>rtgen lm alpha
+			1 7 0 2100 8000000 all<BR>rtgen lm alpha 1 7 1 2100 8000000
+			all<BR>rtgen lm alpha 1 7 2 2100 8000000 all<BR>rtgen lm alpha 1 7
+			3 2100 8000000 all<BR>rtgen lm alpha 1 7 4 2100 8000000 all</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39% VALIGN=TOP>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Длительность
+			процедуры предвычисления таблиц</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>2 days 18
+			hours</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<TABLE WIDTH=100% BORDER=2 CELLPADDING=2 CELLSPACING=0>
+	<COL WIDTH=100*>
+	<COL WIDTH=156*>
+	<TR>
+		<TD COLSPAN=2 WIDTH=100%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Конфигурация
+			#1</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Хэш алгоритм</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>lm</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Набор символов</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>alpha-numeric(ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Диапазон длин
+			открытых сообщений</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>1 - 7</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Объём
+			пространства ключа</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>36^1 + 36^2 +
+			36^3 + 36^4 + 36^5 + 36^6 + 36^7 = 80603140212</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>t</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>2400</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>m</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>40000000</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>l</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>5</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Использование
+			диска</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>m * 16 * l =
+			3200000000 B = 3 GB</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Вероятность
+			успеха</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>0.9904</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Среднее время
+			криптоанализа</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>7.6276 s</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Среднее время
+			криптоанализа на системах с малым объёмом памяти (свободной памяти
+			менее, чем 122MB)</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>13.3075 s</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Максимальное
+			время криптоанализа</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>40.6780 s</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39% VALIGN=TOP>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Команды,
+			используемые для предвычисления таблиц </FONT></FONT>
+			</P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>rtgen lm
+			alpha-numeric 1 7 0 2400 40000000 all<BR>rtgen lm alpha-numeric 1
+			7 1 2400 40000000 all<BR>rtgen lm alpha-numeric 1 7 2 2400
+			40000000 all<BR>rtgen lm alpha-numeric 1 7 3 2400 40000000
+			all<BR>rtgen lm alpha-numeric 1 7 4 2400 40000000 all</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=39% VALIGN=TOP>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Длительность
+			процедуры предвычисления таблиц</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=61%>
+			<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>15 days 17
+			hours</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+</BODY>
+</HTML>

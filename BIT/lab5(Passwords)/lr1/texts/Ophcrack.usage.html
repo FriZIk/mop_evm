@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080924;1391998">
+	<META NAME="CHANGED" CONTENT="20080928;19385318">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 21cm 29.7cm; margin-left: 2cm; margin-right: 1cm; margin-top: 1cm; margin-bottom: 1cm }
+		P { margin-bottom: 0.21cm }
+		A:link { color: #000080; text-decoration: underline }
+		A:visited { color: #800000; text-decoration: underline }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="ru-RU" LINK="#000080" VLINK="#800000" DIR="LTR">
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>3.4.
+Порядок работы с Ophcrack</B></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Запускаем
+программу ophcrack, в результате появиться следующее диалоговое окно,
+при помощи которого появляется возможность восстанваливать пароли
+пользователей ОС Windows:</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/ophcrack/01%20begining.gif" NAME="Графический объект1" ALIGN=LEFT WIDTH=742 HEIGHT=600 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Для
+этого, после первого запуска ophcrack, необходимо указать программе
+местонахождение файлов радужных таблиц (rainbow table). Нажимаем
+кнопку &laquo;Tables&raquo; и выбираем требуемые таблицы.
+<FONT COLOR="#000000">Разработчики ophcrack сделали общедоступными
+несколько радужных таблиц, </FONT><FONT COLOR="#000000">которые можно
+получить на официальном сайте программы
+</FONT>http://ophcrack.sourceforge.net/</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/ophcrack/02%20select%20tables.gif" NAME="Графический объект2" ALIGN=LEFT WIDTH=743 HEIGHT=601 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Задаём
+эти таблицы в качестве рабочих. После этого программа полностью
+готова к восстановлению паролей пользователей, для чего необходимо
+указать значение LM- или NT-хэша(ей). В данной программе можно
+указать как отдельное значение исследуемого хэша (пункт &laquo;Single
+hash&raquo;), так и файл, содержащий в себе список исследуемых хэшей
+(пункт &laquo;Session file&raquo;). Также имеется возможность
+получить значения хэшей из защищённого хранилища ОС Windows текущего
+компьютера (пункт &laquo;Local SAM&raquo;) или удалённого компьютера
+(пункт &laquo;Remote SAM&raquo;). В этих случаях могут потребоваться
+привилегии администратора.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/ophcrack/03%20select%20files%20with.gif" NAME="Графический объект3" ALIGN=LEFT WIDTH=743 HEIGHT=599 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Указываем
+файл с LM-хэшами, по которым необходимо восстановить пароли. В нашем
+случае это файл &laquo;laba_lm_hashes.txt&raquo;.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/ophcrack/04%20select%20files%20with%20LM.gif" NAME="Графический объект4" ALIGN=LEFT WIDTH=741 HEIGHT=504 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Если
+файл указан верно и в нём отсутствуют ошибки на экран будут выведены
+шестнадцатеричные значения исследуемых LM-хэшей.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/ophcrack/05%20prepeared.gif" NAME="Графический объект5" ALIGN=LEFT WIDTH=743 HEIGHT=601 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Начинаем
+процедуру восстановления паролей пользователей нажатием кнопки
+&laquo;Crack&raquo;. Вначале программа пытается восстановить пароли
+методом полного перебора. Соответственно пароли, длина которых меннее
+5 символов, очень быстро определяются. Так же достаточно быстро
+проходит процесс восстановления паролей при помощи метода радужных
+таблиц.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/ophcrack/06%20statistic.gif" NAME="Графический объект6" ALIGN=LEFT WIDTH=757 HEIGHT=627 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>В
+нашем случае за время, равное ~18-19 минутам, были восстановлены все
+100 паролей, 20 из которых должны быть стойкими, так как получены
+случайным образом и имеют длину 14 символов. </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/ophcrack/07%20finish.gif" NAME="Графический объект7" ALIGN=LEFT WIDTH=758 HEIGHT=628 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Такой
+плачевный результат объясняется серьёзными изъянами в хэш-функции LM.</FONT></FONT></P>
+</BODY>
+</HTML>

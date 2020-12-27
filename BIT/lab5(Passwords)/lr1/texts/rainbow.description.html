@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080925;1421583">
+	<META NAME="CHANGED" CONTENT="20080929;272639">
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>2.2.
+Описание метода криптоанализа на основе Rainbow-таблиц </B></FONT></FONT></FONT>
+</P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Криптографические
+атаки основанные на полном переборе требуют много компьютерных
+вычислений и много времени для выполнения. Тогда как одна и та же
+атака осуществляется множество раз, имеется возможность выполнить
+дополнительно полный перебор и сохранить результаты в памяти. Один
+раз осуществив предварительное вычисление атака может осуществляться
+практически мгновенно. Однако, этот метод недееспособен, так как
+требуется крайне большой объём памяти. Хеллманом (Hellman) был
+предложен метод размена &laquo;объём памяти &mdash; время атаки&raquo;.
+Для криптосистем, имеющих N ключей, данный метод восстанавливает ключ
+за N^(2/3) операций используя N^(2/3) слов памяти. Типичное
+применение этого метода &mdash; восстановление ключ при известных
+открытом сообщении и соответствующем ему зашифрованном сообщении.
+Другая область использования метода &mdash; хэши паролей
+пользователей.</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Размен &laquo;память
+&mdash; время&raquo; является вероятностным методом. Успех не
+гарантируется и уровень успешности зависит от времени и объёма
+памяти, доступные криптоаналитику. </FONT></FONT>
+</P>
+<P><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Исходный
+метод на основе размена &laquo;память &mdash; время&raquo;</B></FONT></FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Имея заданное
+открытое сообщение <I>P0</I> и соответствующее ему зашифрованное
+сообщение <I>C0</I> необходимо найти ключ <I>k</I> (из множества
+ключей <I>N</I>), который использовался для шифрования открытого
+сообщения при помощи шифра <I>S</I>. </FONT></FONT>
+</P>
+<P><IMG SRC="rainbow.description_html_m20295b56.jpg" NAME="Графический объект1" ALIGN=LEFT WIDTH=113 HEIGHT=29 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Мы
+пробуем сформировать заранее все возможные зашифрованные сообщения
+путём шифрования открытого сообщения используя при этом все возможные
+ключи. Шифротексты организуются в цепочки, однако в память
+сохраняются только первый и последний элементы цепочки. Цепочки
+создаются используя <I>функцию уменьшения R</I>, которая создаёт
+ключи из зашифрованных сообщений. Уменьшение вызвано тем, что
+зашифрованное сообщение больше длины ключа. Таким образом,
+генератором ключей выступает сам шифрующий алгоритм. Путём применения
+шифра <I>S</I> и уменьшающей функции <I>R</I> формируются цепочки
+различных ключей и шифротекстов.</FONT></FONT></P>
+<P><IMG SRC="rainbow.description_html_m4a050c27.jpg" NAME="Графический объект2" ALIGN=LEFT WIDTH=179 HEIGHT=38 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Осуществление
+последовательности операций шифрования и уменьшения <SPAN STYLE="text-decoration: none"><I>R(Sk(P0))
+</I></SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">записывается
+как </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>f(k)</I></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">и
+приводит к формированию ключа из ключа, что приводит к созданию
+цепочки ключей:</SPAN></SPAN></FONT></FONT></P>
+<P><IMG SRC="rainbow.description_html_614a00f8.jpg" NAME="Графический объект3" ALIGN=LEFT WIDTH=190 HEIGHT=36 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">при
+этом создаётся </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>m</I></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">цепочек
+длиной </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>t</I></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">каждая
+и их первый и последний элементы сохраняются в таблице.</SPAN></SPAN></FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">Имея
+шифрованное сообщение </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>C</I></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">мы
+пытаемся определить, находится ли неизвестный ключ, использованный
+при создании </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>C,</I></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">среди
+тех, что использовались при создании таблицы. Для осуществления этого
+мы формируем цепочку ключей начиная с </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>R(C)</I></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">и
+заканчивая при достижении длины в </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>t</I></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">элементов.
+Если шифротекст </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>C</I></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">всё
+таки был получен при помощи ключа, использованного при создании
+таблицы, то мы, следовательно, можем сформировать ключ, совпадающий с
+последним ключом цепочки. Этот последний ключ цепочки храниться в
+таблице совместно с первым ключом цепочки. Используя первый ключ
+цепочки из таблицы восстанавливаем внутреннее содержание цепочки и,
+соответственно, ключ, предшествовавший операции </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>R(C).
+</I></SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">Это
+ключ, который использовался для формирования </SPAN></SPAN><SPAN STYLE="text-decoration: none"><I>C,</I></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">т.е.
+ключ, который мы ищем. </SPAN></SPAN></FONT></FONT>
+</P>
+<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Таким
+образом, поиск секретного ключа осуществляется в два этапа:</FONT></FONT></P>
+<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>1.
+Зная шифр и имея известные открытое сообщение и закрытое сообщение
+осуществляем работу шифра в режиме обратной связи, когда выходное
+значение шифра подаётся (после уменьшения) на его вход в качестве
+ключа шифрования. При этом открытое сообщение остаётся фиксированным.
+После каждой операции шифрования получаем новый ключ цепочки, который
+сравниваем с ключами, хранящимися в таблице. </FONT></FONT>
+</P>
+<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>2.
+Если полученный ключ цепочки совпадает с ключом из таблицы, то
+восстанавливаем внутреннее содержание цепочки из таблицы (зная первый
+и последний элемент) и таким образом находим неизвестный секретный
+ключ. </FONT></FONT>
+</P>
+<P><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Проблемы
+исходного метода на основе размена &laquo;память &mdash; время&raquo;</B></FONT></FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>К сожалению
+существует вероятность того, что цепочки, начинающиеся с различных
+ключей в какой-то момент совпадут и станут одинаковыми (неразличимы).
+Это является следствием того, при организации обратной связи
+уменьшающая функция <I>R</I> осуществляет сужение пространства
+шифротекстов в пространство ключей. Чем больше таблица, тем выше
+вероятность того, что новые цепочки сольются с одной из предыдущих.
+Каждое слияние уменьшает количество различных ключей, которое может
+покрывать таблица. Шанс найти неизвестный секретный ключ при
+использовании таблицы, состоящей из <I>m</I> строк и <I>t</I> ключей
+составляет</FONT></FONT></P>
+<P><IMG SRC="rainbow.description_html_m9177a46.jpg" NAME="Графический объект4" ALIGN=LEFT WIDTH=242 HEIGHT=58 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Эффективность
+одиночной таблицы значительно уменьшается с увеличением её размера.
+Для получения высокой вероятности срабатывания метода наиболее лучшим
+средством является формирование множества более маленьких таблиц, с
+использованием для каждой таблицы своей уменьшающей функции.
+Вероятность успеха при использовании <I>l</I> таблиц составляет:</FONT></FONT></P>
+<P><IMG SRC="rainbow.description_html_2f1c02f0.jpg" NAME="Графический объект5" ALIGN=LEFT WIDTH=360 HEIGHT=75 BORDER=0><BR CLEAR=LEFT><BR><BR>
+</P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Цепочки различных
+таблиц могут совпадать, но не сливаются благодаря использованию
+различных функций уменьшения для каждой таблицы.</FONT></FONT></P>
+<P><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Ложные
+срабатывания</B></FONT></FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Когда
+осуществляется поиск ключа по таблице, обнаружение совпадения с
+конечной точкой предвычесленой цепочки не обязательно означает, что
+искомый секретный ключ находиться в таблице. Также, секретный ключ
+может быть частью цепочки, которая имеет такую же конечное значение,
+но не содержится в таблице. В этом случае восстановление табличной
+цепочки по заданному началу и концу не приведёт к обнаружению
+секретного ключа. Такое явление называется ложным срабатыванием
+(false alarm). Ложные срабатывания также случаются когда искомый ключ
+содержится в табличной цепочке, но цепочка сливается с другой
+табличной цепочкой. В этом случае несколько цепочек, имеющих
+различные начальные значения и одинаковые конечные значения, должны
+быть обработаны отдельно для точного определения искомого секретного
+ключа. </FONT></FONT>
+</P>
+<P><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Более
+эффективная структура таблиц</B></FONT></FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Основным
+ограничением оригинального метода является тот факт, что когда две
+цепочки (в одной таблице) совпадают в каком-то месте, то происходит
+слияние этих цепочек, то есть, после этого места они становятся
+одинаковыми. Philippe Oechslin предложил новый тип цепочек, которые
+могут совпадать в некоторых местах, но при этом не сливаются (не
+становятся одинаковыми).</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Такие цепочки
+были названы автором <I>радужными цепочками</I> (rainbow chains). Они
+используют <I><B>различные</B></I> уменьшающие функции для каждой
+точки цепочки. Таким образом, совпадение элементов цепочек приведёт к
+слиянию в том случае, если совпадение произошло в <I><B>одинаковых
+позициях</B></I> обеих цепочек. Если совпадение произошло в различных
+позициях, то формирование цепочек продолжиться с различных
+уменьшающих функций и , соответственно, не приведёт к слиянию. Для
+цепочек, состоящих из <I>t</I> элементов, при возникновении
+совпадения в какой-либо позиции шанс слияния равен значению 1/<I>t</I>.
+Вероятность успеха в пределах одной таблицы размерности <I>m x t</I>
+определяется выражением:</FONT></FONT></P>
+<P><IMG SRC="rainbow.description_html_33c76ba2.jpg" NAME="Графический объект6" ALIGN=LEFT WIDTH=211 HEIGHT=52 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>где
+<I>m1 = m </I>и </FONT></FONT>
+</P>
+<P><IMG SRC="rainbow.description_html_m22715ac6.jpg" NAME="Графический объект7" ALIGN=LEFT WIDTH=181 HEIGHT=36 BORDER=0><BR CLEAR=LEFT><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Интересно
+то, что вероятность успеха для радужных таблиц имеет прямую
+зависимость с вероятность успеха для классических таблиц. Вероятность
+успеха <I>t</I> классических таблиц размерностью <I>m x t</I>
+приблизительно соответствует вероятности успеха одиночной радужной
+таблицы размерностью <I>mt x t</I>. В обоих случаях таблицы содержат
+<I>mt^2</I> ключей, полученных с использованием <I>t</I> различных
+уменьшающих функций.</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Радужные цепочки
+имеют следующие преимущества:</FONT></FONT></P>
+<UL>
+	<LI><P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>количество
+	просмотров таблицы уменьшено в <I>t </I>раз по сравнению с
+	классическим методом Hellmana;</FONT></FONT></P>
+	<LI><P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>слияние
+	радужных цепочек приводит к появлению одинаковых конечных значений,
+	что легко обнаруживаемо. Поэтому, радужные цепочки могут
+	использоваться для формирования таблиц, не имеющих сливающихся
+	цепочек;</FONT></FONT></P>
+	<LI><P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>радужные
+	цепочки не имеют циклической структуры, так как каждая уменьшающая
+	функция используется в цепочке один раз. Это увеличивает скорость,
+	так как не происходит лишняя обработка цепочек с циклической
+	структурой; </FONT></FONT>
+	</P>
+	<LI><P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>радужные
+	цепочки имеют фиксированную длину, что приводит к уменьшению
+	количества ложных срабатываний.</FONT></FONT></P>
+</UL>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Ниже приведена
+статистика крупного интернет-проекта по восстановлению паролей
+пользователей с использованием радужных таблиц
+[<A HREF="http://www.freerainbowtables.com/">http://www.freerainbowtables.com/</A>]</FONT></FONT></P>
+<P><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Статистика взята
+24 сентября 2008 г., цифры указанные в ней говорят об высокой
+востребованности приведённого выше метода.</FONT></FONT></P>
+<H3><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Stats</FONT></FONT></H3>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Active
+machines 1246 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Online
+machines 383 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Current
+CPU power 1609 GHZ </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Last
+24 hours</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>3760&nbsp;million
+chains </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Current
+speed 44167&nbsp;chains per second </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Data
+growth 56.03 GB </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Cracked
+hashes 39280 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT FACE="Times New Roman, serif"><FONT SIZE=4>MD5</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>32897
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT FACE="Times New Roman, serif"><FONT SIZE=4>NTLM</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>4900
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT FACE="Times New Roman, serif"><FONT SIZE=4>LM</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>1483
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Uncracked
+hashes 41135 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT FACE="Times New Roman, serif"><FONT SIZE=4>MD5</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>33597
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT FACE="Times New Roman, serif"><FONT SIZE=4>NTLM</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>6232
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT FACE="Times New Roman, serif"><FONT SIZE=4>LM</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>1306
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Success
+rate 48.85% </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT FACE="Times New Roman, serif"><FONT SIZE=4>MD5</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>49.47%
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT FACE="Times New Roman, serif"><FONT SIZE=4>NTLM</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>44.02%
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT FACE="Times New Roman, serif"><FONT SIZE=4>LM</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>53.17%
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Most
+popular password</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>test
+(151 times) </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>Cracking
+queue size</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4>253
+</FONT></FONT>
+</P>
+</BODY>
+</HTML>

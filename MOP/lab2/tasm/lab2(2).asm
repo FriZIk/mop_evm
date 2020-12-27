@@ -21,7 +21,8 @@ BEG: cmp [BX],AX
     add DX,[BX] ;esli -
     NO: add BX,2 ; esli +
 loop BEG
-
+not DX
+add DX, 1
 mov sum,DX ;v dop code
 
 QUIT: exitcode 0

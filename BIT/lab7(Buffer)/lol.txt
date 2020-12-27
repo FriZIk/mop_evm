@@ -1,0 +1,125 @@
+/mnt/c/Users/User/Desktop/mop_evm/BIT/'lab7(Buffer)' папка с лабой
+
+При компиляции возможна ошибка: “fatal error: bits/libc-header-start.h: No such file or directory”
+Фикс: apt-get install gcc-multilib
+
+Компиляция: gcc -O0 -mpreferred-stack-boundary=2 -g -m32 -fno-stack-protector main.c
+	    gcc -o test -O0 -mpreferred-stack-boundary=2 -g -m32 -fno-stack-protector main.c
+
+Компилятор выдаст следующие прикольчики, значит всё нормально
+main.c: In function ‘main’:
+main.c:7:5: warning: implicit declaration of function ‘buff_overflow_test’ [-Wimplicit-function-declaration]
+     buff_overflow_test();
+     ^~~~~~~~~~~~~~~~~~
+main.c: In function ‘buff_overflow_test’:
+main.c:19:5: warning: implicit declaration of function ‘gets’; did you mean ‘fgets’? [-Wimplicit-function-declaration]
+     gets(buff_var0);
+     ^~~~
+     fgets
+/usr/bin/ld: /tmp/ccbrrwg3.o: in function `buff_overflow_test':
+/mnt/c/Users/User/Desktop/mop_evm/BIT/lab7(Buffer)/main.c:19: warning: the `gets' function is dangerous and should not be used.
+
+Но если ты думашеь что теперь эта срань запустится, то ты обосрал штаны:
+-bash: ./a.out: cannot execute binary file: Exec format error
+
+Фиксится эта хуйня другими параметрами для компилятора, а именно:
+gcc -o test -O0 -mpreferred-stack-boundary=2 -g -m64 -fno-stack-protector main.c
+
+Барабанная дробь.... ты говна поешь целую гору:
+cc1: error: -mpreferred-stack-boundary=2 is not between 3 and 12 
+Ошибка не гуглится никто не понимает что это за срань, единсвтенно что помогает это изменить -mpreferred-stack-boundary на хотя бы 3
+После этого всё запустится.
+
+Ещё одна ахуенная ошибка с бундари
+cc1: error: -mpreferred-stack-boundary=2 is not between 3 and 12
+
+
+Нужный для отчёта вывод отладчика:
+
+
+frizik@DESKTOP-ES6R3C4:/mnt/c/Users/User/Desktop/mop_evm/BIT/lab7(Buffer)$ gdb test
+GNU gdb (Debian 8.2.1-2+b3) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from test...done.
+(gdb) break main
+Breakpoint 1 at 0x1159: file main.c, line 7.
+(gdb) disassemble main
+Dump of assembler code for function main:
+   0x0000000000001155 <+0>:     push   %rbp
+   0x0000000000001156 <+1>:     mov    %rsp,%rbp
+   0x0000000000001159 <+4>:     mov    $0x0,%eax
+   0x000000000000115e <+9>:     callq  0x116a <buff_overflow_test>
+   0x0000000000001163 <+14>:    mov    $0x0,%eax
+   0x0000000000001168 <+19>:    pop    %rbp
+   0x0000000000001169 <+20>:    retq
+End of assembler dump.
+(gdb) disassemble buff_overflow_test
+Dump of assembler code for function buff_overflow_test:
+   0x000000000000116a <+0>:     push   %rbp
+   0x000000000000116b <+1>:     mov    %rsp,%rbp
+   0x000000000000116e <+4>:     sub    $0x10,%rsp
+   0x0000000000001172 <+8>:     movl   $0x0,-0x4(%rbp)
+   0x0000000000001179 <+15>:    lea    0xe88(%rip),%rdi        # 0x2008
+   0x0000000000001180 <+22>:    callq  0x1030 <puts@plt>
+   0x0000000000001185 <+27>:    lea    -0x8(%rbp),%rax
+   0x0000000000001189 <+31>:    mov    %rax,%rdi
+   0x000000000000118c <+34>:    mov    $0x0,%eax
+   0x0000000000001191 <+39>:    callq  0x1050 <gets@plt>
+   0x0000000000001196 <+44>:    lea    -0x8(%rbp),%rax
+   0x000000000000119a <+48>:    lea    0xe7f(%rip),%rsi        # 0x2020
+   0x00000000000011a1 <+55>:    mov    %rax,%rdi
+   0x00000000000011a4 <+58>:    callq  0x1040 <strcmp@plt>
+   0x00000000000011a9 <+63>:    test   %eax,%eax
+   0x00000000000011ab <+65>:    je     0x11bb <buff_overflow_test+81>
+   0x00000000000011ad <+67>:    lea    0xe71(%rip),%rdi        # 0x2025
+   0x00000000000011b4 <+74>:    callq  0x1030 <puts@plt>
+   0x00000000000011b9 <+79>:    jmp    0x11ce <buff_overflow_test+100>
+   0x00000000000011bb <+81>:    lea    0xe75(%rip),%rdi        # 0x2037
+   0x00000000000011c2 <+88>:    callq  0x1030 <puts@plt>
+   0x00000000000011c7 <+93>:    movl   $0x1,-0x4(%rbp)
+   0x00000000000011ce <+100>:   cmpl   $0x0,-0x4(%rbp)
+   0x00000000000011d2 <+104>:   je     0x11e0 <buff_overflow_test+118>
+   0x00000000000011d4 <+106>:   lea    0xe75(%rip),%rdi        # 0x2050
+   0x00000000000011db <+113>:   callq  0x1030 <puts@plt>
+   0x00000000000011e0 <+118>:   nop
+   0x00000000000011e1 <+119>:   leaveq
+   0x00000000000011e2 <+120>:   retq
+End of assembler dump.
+(gdb)  
+
+
+Пошаговая отладка (не закончилась, эта хуйнч сраная упирается в оутпуты надо фиксить это дерьмо как-то, попробовать тройку и компиляцию как в примере, дожно по идее помочь):
+frizik@DESKTOP-ES6R3C4:/mnt/c/Users/User/Desktop/mop_evm/BIT/lab7(Buffer)$ gdb -q test
+Reading symbols from test...done.
+(gdb) break main
+Breakpoint 1 at 0x1159: file main.c, line 7.
+(gdb) r
+Starting program: /mnt/c/Users/User/Desktop/mop_evm/BIT/lab7(Buffer)/test
+
+Breakpoint 1, main () at main.c:7
+7           buff_overflow_test();
+(gdb) s
+buff_overflow_test () at main.c:16
+16          int pass = 0;
+(gdb)
+18          printf("\n Enter the password : \n");
+(gdb)
+__GI__IO_puts (str=0x8002008 "\n Enter the password : ") at ioputs.c:35
+35      ioputs.c: No such file or directory.
+(gdb)
+__strlen_avx2 () at ../sysdeps/x86_64/multiarch/strlen-avx2.S:55
+55      ../sysdeps/x86_64/multiarch/strlen-avx2.S: No such file or directory.
+(gdb)

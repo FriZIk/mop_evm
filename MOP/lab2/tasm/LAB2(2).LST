@@ -1,5 +1,5 @@
-Turbo Assembler	 Version 3.1	    11/05/20 09:45:40	    Page 1
-lab2(2).asm
+Turbo Assembler	 Version 3.1	    11/18/20 02:04:16	    Page 1
+LAB2(2).ASM
 
 
 
@@ -46,7 +46,7 @@ lab2(2).asm
 1    41	0030  B8 4C00			     MOV     AX,04C00h
 1    42	0033  CD 21			     INT     21h
      43				     end
-Turbo Assembler	 Version 3.1	    11/05/20 09:45:40	    Page 2
+Turbo Assembler	 Version 3.1	    11/18/20 02:04:16	    Page 2
 Symbol Table
 
 
@@ -54,9 +54,9 @@ Symbol Table
 
 Symbol Name			  Type	 Value
 
-??DATE				  Text	 "11/05/20"
-??FILENAME			  Text	 "lab2(2) "
-??TIME				  Text	 "09:45:40"
+??DATE				  Text	 "11/18/20"
+??FILENAME			  Text	 "LAB2(2) "
+??TIME				  Text	 "02:04:16"
 ??VERSION			  Number 030A
 @32BIT				  Text	 0
 @CODE				  Text	 _TEXT

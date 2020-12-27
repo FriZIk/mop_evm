@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20080924;1391998">
+	<META NAME="CHANGED" CONTENT="20080928;23121175">
+	<STYLE TYPE="text/css">
+	<!--
+		P { margin-bottom: 0.21cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT COLOR="#0000ff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>3.1.
+Порядок работы с формирователем хэшей DAMN Hash Calculator и
+SAMInside</B></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=3 STYLE="font-size: 13pt">Подготовим
+для дальнейшей работы пары &quot;пароль - хэш функция&quot;. По
+значению полученных хэш-функций в последующем будем осуществлять
+попытки восстановления паролей. </FONT></FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=3 STYLE="font-size: 13pt"><FONT FACE="Times New Roman, serif">Для
+формирования LM-хэшей из паролей рользователей запускаем
+демонстрационную версию SAMInside. Выбираем в данной программе меню
+&quot;Tools&quot;, подпункт &quot;LM/NT-hash generator&quot;:</FONT></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/part1/01%20create%20LM-hash.gif" NAME="Графический объект1" ALIGN=LEFT WIDTH=740 HEIGHT=185 BORDER=0><BR CLEAR=LEFT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3 STYLE="font-size: 13pt">В
+появившемся диалоговом окне вводим пароль, в результате чего вычислим
+значение LM- и NT-хэшей для пароля &laquo;gfg3&raquo;:</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/part1/02%20create%20LM-hash%20gfg3.gif" NAME="Графический объект2" ALIGN=LEFT WIDTH=496 HEIGHT=233 BORDER=0><BR CLEAR=LEFT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3 STYLE="font-size: 13pt">В
+результате получим шестнадцатеричное значение LM-хэша
+&laquo;3B68D0B0B2F879D8AAD3B435B51404EE&raquo;.</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3 STYLE="font-size: 13pt">Аналогично
+формируем значения LM-хэша для пароля &laquo;asd3&raquo; и др.:</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/part1/03%20create%20LM-hash%20asd3.gif" NAME="Графический объект3" ALIGN=LEFT WIDTH=494 HEIGHT=233 BORDER=0><BR CLEAR=LEFT><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=3 STYLE="font-size: 13pt">Копируем
+эти значения в удобное для нас место, например в &quot;Блокнот&quot;.</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=3 STYLE="font-size: 13pt">Для
+формирования sha1-хэшей запускаем программу DAMN Hash Calculator.
+<FONT FACE="Times New Roman, serif">Вводим в ней такие-же пароли (в
+поле Text) и нажатием кнопки &quot;Calculate&quot; получаем требуемые
+хэш-функции:</FONT></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/part1/07%20create%20sha-hash%20gfg3.gif" NAME="Графический объект5" ALIGN=LEFT WIDTH=740 HEIGHT=530 BORDER=0><BR CLEAR=LEFT><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=3 STYLE="font-size: 13pt"><FONT FACE="Times New Roman, serif">В
+итоге у нас появляется список паролей и соответствующих им LM- и
+SHA1-хэшей. Сохраняем эти списки в текстовые файлы, например
+&laquo;laba_lm_hashes.txt&raquo; и &laquo;laba_sha1_hashes.txt&raquo;.</FONT></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="Times New Roman CYR, serif"><FONT SIZE=3 STYLE="font-size: 13pt"><FONT FACE="Times New Roman, serif">Для
+получения возможности оценки влияния параметров паролей (длина,
+используемый набор символов, использование общеупотребительных слов и
+т.д.) на скорость и вероятность их восстановления рекомендуется
+выбрать пароли с различными комбинациями этих параметров.</FONT></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="images/part1/09%20sha-hashes.gif" NAME="Графический объект9" ALIGN=LEFT WIDTH=720 HEIGHT=429 BORDER=0><BR CLEAR=LEFT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3 STYLE="font-size: 13pt">Для
+примера приведены пароли (и соответствующие им LM- и SHA1-хэши),
+имеющие различную длину, а также состоящие из общеупотребительных
+слов и слов с добавлением цифр и т.д.</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+</BODY>
+</HTML>
