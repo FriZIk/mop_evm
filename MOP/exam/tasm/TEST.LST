@@ -1,0 +1,61 @@
+Turbo Assembler	 Version 3.1	    01/14/21 10:25:35	    Page 1
+test.asm
+
+
+
+      1					 .386
+      2	00000000			 model SMALL
+      3	00000000			 stack 100h
+      4
+      5	00000000			 dataseg
+      6
+      7	00000000			 codeseg
+      8					 startupcode
+1     9	00000000			 @Startup:
+1    10	00000000  66| BA 0000s			 MOV	 DX,@data
+1    11	00000004  8E DA				 MOV	 DS,DX
+1    12	00000006  66| 8C D3			 MOV	 BX,SS
+1    13	00000009  66| 2B DA			 SUB	 BX,DX
+1    14	0000000C  66| C1 E3 04			 SHL	 BX,4
+1    15	00000010  8E D2				 MOV	 SS,DX
+1    16	00000012  66| 03 E3			 ADD	 SP,BX
+     17	00000015  66| B8 0053		 mov AX, 053h
+     18	00000019  66| F7 D0		 not AX
+     19	0000001C			 QUIT: exitcode	0
+1    20	0000001C  66| B8 4C00			 MOV	 AX,04C00h
+1    21	00000020  CD 21				 INT	 21h
+     22					 end
+Turbo Assembler	 Version 3.1	    01/14/21 10:25:35	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "01/14/21"
+??FILENAME			  Text	 "test	  "
+??TIME				  Text	 "10:25:35"
+??VERSION			  Number 030A
+@32BIT				  Text	 1
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0F0FH
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 TEST
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 _TEXT:0000
+@WORDSIZE			  Text	 4
+QUIT				  Near	 _TEXT:001C
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  32  0100 Para	  Stack	  STACK
+  _DATA				  32  0000 Dword  Public  DATA
+_TEXT				  32  0022 Dword  Public  CODE
+

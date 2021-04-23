@@ -29,6 +29,6 @@ mov X,BX;-7(C – A/4) + 3B – 5
 QUIT: exitcode 0
 end
 
-tasm lab -zi -l 
-tlink -v
-td 
+;tasm lab -zi -l 
+;tlink -v
+;td 

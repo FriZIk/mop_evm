@@ -1,0 +1,280 @@
+Turbo Assembler	 Version 3.1	    12/28/20 02:19:23	    Page 1
+LAB6T.ASM
+
+
+
+      1				     ;Разработать подпрограмму, которая удаляет, начиная+
+      2				     с	заданной позиции
+      3				     ;строки, указанное число символов. Разработать	    +
+      4				     программу, которая	вводит с
+      5				     ;клавиатуры строку, вводит позицию и	длину		    +
+      6				     удаляемой	части строки	и
+      7				     ;удаляет эту часть [14].
+      8
+      9					 locals	__
+     10	0000				 model small
+     11	0000				 stack 100h
+     12	0000				 dataseg
+     13	0000  0D 0A 0D 0A 51 57	45+  MESS1 db 0dh,0ah,0dh,0ah,"QWETY",0dh,0ah,"$"
+     14	      54 59 0D 0A 24
+     15	000C  0D 0A D0 92 D0 B2	D0+  MESS2 db 0dh,0ah,"Введите позицию: $"
+     16	      B5 D0 B4 D0 B8 D1	82+
+     17	      D0 B5 20 D0 BF D0	BE+
+     18	      D0 B7 D0 B8 D1 86	D0+
+     19	      B8 D1 8E 3A 20 24
+     20	002E  0D 0A D0 92 D0 B2	D0+  MESS3 db 0dh,0ah,"Введите число удаляемых символов: $"
+     21	      B5 D0 B4 D0 B8 D1	82+
+     22	      D0 B5 20 D1 87 D0	B8+
+     23	      D1 81 D0 BB D0 BE	20+
+     24	      D1 83 D0 B4 D0 B0	D0+
+     25	      BB D1 8F D0 B5 D0	BC+
+     26	      D1 8B D1 85 20 D1	81+
+     27	      D0 B8 D0 BC D0 B2	D0+
+     28	      BE D0 BB D0 BE D0	B2+
+     29	      3A 20 24
+     30	0070  0D 0A 0D 0A D0 A1	D1+  MESS4 db 0dh,0ah,0dh,0ah,"Строка после удаления:",0dh,0ah,"$"
+     31	      82 D1 80 D0 BE D0	BA+
+     32	      D0 B0 20 D0 BF D0	BE+
+     33	      D1 81 D0 BB D0 B5	20+
+     34	      D1 83 D0 B4 D0 B0	D0+
+     35	      BB D0 B5 D0 BD D0	B8+
+     36	      D1 8F 3A 0D 0A 24
+     37	00A0  50		     S_BUFLEN db 80 ; Макс.	длина строки
+     38	00A1  ??		     S_FACTLEN db ? ; Длина фактически введенной строки
+     39	00A2  50*(??)		     S_INPBUF db 80 dup(?) ; Введенная	строка
+     40	00F2  03		     N_BUFLEN db 3 ; Макс. длина числа при вводе
+     41	00F3  ??		     N_FACTLEN db ? ; Фактическая длина
+     42	00F4  03*(??)		     N_INPBUF db 3 dup(?) ; Строка представления числа
+     43	00F7  ????		     POSDEL dw ? ; Позиция, начиная с которой удаляем
+     44	00F9  ????		     LENDEL dw ? ; Сколько символов удалить
+     45	00FB			     codeseg
+     46				     startupcode
+1    47	0000			     @Startup:
+1    48	0000  BA 0000s			     MOV     DX,@data
+1    49	0003  8E DA			     MOV     DS,DX
+1    50	0005  8C D3			     MOV     BX,SS
+1    51	0007  2B DA			     SUB     BX,DX
+1    52	0009  D1 E3 D1 E3 D1 E3	D1+	     SHL     BX,4
+     53	      E3
+1    54	0011  FA			     CLI
+1    55	0012  8E D2			     MOV     SS,DX
+1    56	0014  03 E3			     ADD     SP,BX
+1    57	0016  FB			     STI
+Turbo Assembler	 Version 3.1	    12/28/20 02:19:23	    Page 2
+LAB6T.ASM
+
+
+
+     58
+     59				     ; Ввод	строки
+     60	0017  BA 0000r		     MLOOP: lea	DX, MESS1
+     61	001A  B4 09			 mov AH, 09h
+     62	001C  CD 21			 int 21h ;Приглашение к вводу строки
+     63	001E  BA 00A0r			 lea DX, S_BUFLEN
+     64	0021  B4 0A			 mov AH, 0Ah
+     65	0023  CD 21			 int 21h ;Ввод строки
+     66	0025  8A 1E 00A1r		 mov BL, S_FACTLEN
+     67	0029  80 FB 00			 cmp BL, 0 ;Строка пустая?
+     68	002C  75 03			 jne LLL0 ;Нет – продолжать
+     69	002E  E9 008A			 jmp QUIT ;Закончить работу
+     70	0031  B7 00		     LLL0: mov BH, 0
+     71					 ;Дополнить длину	до слова
+     72	0033  83 C3 02			 add BX, 2 ; и	получить адрес позиции
+     73	0036  03 DA			 add BX, DX ; сразу после конца строки
+     74	0038  C6 07 00			 mov byte ptr [BX],0 ;Записать признак конца строки
+     75					 ; Ввод позиции удаления
+     76	003B  BA 000Cr		     LLL1: lea DX, MESS2 ;Приглашение
+     77	003E  B4 09			 mov AH, 09h; к вводу
+     78	0040  CD 21			 int 21h; позиции удаления
+     79	0042  BA 00F2r			 lea DX, N_BUFLEN
+     80	0045  B4 0A			 mov AH, 0Ah
+     81	0047  CD 21			 int 21h ;Ввод строки	числа
+     82	0049  BB 00F4r			 lea BX, N_INPBUF;Адрес строки представления числа
+     83	004C  8A 0E 00F3r		 mov CL, N_FACTLEN;Длина этой строки
+     84	0050  E8 006D			 call VAL ;Перевод в целое	число
+     85	0053  72 E6			 jc LLL1 ;Ошибка?	– повторить ввод
+     86	0055  3C 00			 cmp AL, 0 ;Ноль?
+     87	0057  74 E2			 je LLL1 ;Повторить ввод
+     88	0059  3A 06 00A1r		 cmp AL, S_FACTLEN;Превышает длину строки?
+     89	005D  7F DC			 jg LLL1 ;Повторить ввод
+     90	005F  A3 00F7r			 mov POSDEL, AX	;Запомнить позицию удаления
+     91					 ; Ввод длины удаляемой части
+     92	0062  BA 002Er		     LLL2: lea DX, MESS3 ;Приглашение
+     93	0065  B4 09			 mov AH, 09h ; к вводу
+     94	0067  CD 21			 int 21h ; числа удаляемых
+     95	0069  BA 00F2r			 lea DX, N_BUFLEN
+     96	006C  B4 0A			 mov AH, 0Ah
+     97	006E  CD 21			 int 21h ;Ввод строки	числа удаляемых
+     98	0070  BB 00F4r			 lea BX, N_INPBUF ;Адрес строки представления числа
+     99	0073  8A 0E 00F3r		 mov CL, N_FACTLEN;Длина этой строки
+    100	0077  E8 0046			 call VAL ;Перевод в целое	число
+    101	007A  72 E6			 jc LLL2 ;Ошибка?	– повторить ввод
+    102	007C  A3 00F9r			 mov LENDEL, AX	;Запомнить число удаляемых
+    103	007F  03 06 00F7r		 add AX, POSDEL	;Подсчитать, не выходит ли
+    104	0083  48			 dec AX	; удаляемая часть
+    105	0084  3A 06 00A1r		 cmp AL, S_FACTLEN ; за конец строки?
+    106	0088  7F D8			 jg LLL2 ;Если да	– повторить ввод
+    107					 ; Занесение параметров в стек и вызов			    +
+    108				     подпрограммы удаления
+    109	008A  B8 00A2r			 lea AX, S_INPBUF
+    110	008D  50			 push AX ;1-й параметр	– адрес строки
+    111	008E  FF 36 00F7r		 push POSDEL ;2-й параметр –	позиция удаления
+    112	0092  FF 36 00F9r		 push LENDEL ;3-й параметр –	число удаляемых
+    113	0096  E8 004C			 call DELSUBS ;Вызов подпрограммы
+    114					 ; Вывод результата
+Turbo Assembler	 Version 3.1	    12/28/20 02:19:23	    Page 3
+LAB6T.ASM
+
+
+
+    115	0099  BA 0070r			 lea DX, MESS4
+    116	009C  B4 09			 mov AH, 09h
+    117	009E  CD 21			 int 21h;Заголовок вывода
+    118	00A0  BB 00A2r			 lea BX, S_INPBUF
+    119	00A3  B9 0050			 mov CX, 80
+    120	00A6  80 3F 00		     LLL3: cmp byte ptr	[BX],0 ;Цикл поиска конца строки и выход
+    121	00A9  74 03			 je LLL4 ; если найден конец строки
+    122	00AB  43			 inc BX	;Сдвиг по строке
+    123	00AC  E2 F8			 loop LLL3
+    124	00AE  C6 07 24		     LLL4: mov byte ptr	[BX],'$';Заменить признак конца строки
+    125	00B1  BA 00A2r			 lea DX, S_INPBUF
+    126	00B4  B4 09			 mov AH, 09h
+    127	00B6  CD 21			 int 21h ; Вывод результата
+    128	00B8  E9 FF5C			 jmp MLOOP ; На повторение работы
+    129	00BB			     QUIT: exitcode 0
+1   130	00BB  B8 4C00			     MOV     AX,04C00h
+1   131	00BE  CD 21			     INT     21h
+    132				     ;Действие:
+    133				     ; функция вычисляет целое число по его строковому	    +
+    134				     представлению.
+    135				     ; Результат не может быть больше	255.
+    136				     ; Для неверно введенных	чисел устанавливает флаг	    +
+    137				     переноса
+    138				     ; Параметры:
+    139				     ; BX – адрес строки представления числа
+    140				     ; CX – длина этой строки
+    141				     ; Возвращает:
+    142				     ; CF – установлен, если в	строке не цифры, AX – не	    +
+    143				     определен
+    144				     ; сброшен, строка нормальная, AX – число
+    145				     ; AX – преобразованное число, если сброшен
+    146	00C0			     VAL proc near
+    147	00C0  52		     push DX ;Сохранить все	изменяемые регистры,
+    148				     ; кроме AX, в котором	результат
+    149	00C1  B5 00		     mov CH, 0 ;Расширяем длину до слова
+    150	00C3  B8 0000		     mov AX, 0 ;Начальное значение результата
+    151	00C6  B2 0A		     mov DL, 10	;Основание системы счисления
+    152	00C8  F6 EA		     __1: imul DL ;Умножить на основание
+    153	00CA  72 16			 jc __2	;Переполнение байта?
+    154	00CC  8A 37			 mov DH, [BX] ;Очередная цифра
+    155	00CE  80 EE 30			 sub DH, '0' ;Получить значение	цифры
+    156	00D1  7C 0F			 jl __2	;Это	была не цифра!
+    157	00D3  80 FE 09			 cmp DH, 9
+    158	00D6  7F 0A			 jg __2	;Это	опять же	была не цифра!
+    159	00D8  02 C6			 add AL, DH ;+ значение	цифры к результату
+    160	00DA  72 06			 jc __2	;Переполнение байта?
+    161	00DC  43			 inc BX	;Сдвиг по строке
+    162	00DD  E2 E9			 loop __1 ;Цикл по строке
+    163	00DF  EB 02 90			 jmp __3 ;Нормальное число
+    164	00E2  F9		     __2: stc ;Было	переполнение – устанавливаем	CF
+    165	00E3  5A		     __3: pop DX ;Восстановить все, что сохраняли
+    166	00E4  C3			 ret
+    167	00E5			     VAL endp
+    168				     ; Подпрограмма	удаления подстроки
+    169	00E5			     DELSUBS proc near
+    170	      =0006			 arg __Ldel: word, __Pdel: word, __StrAdr: word	= __ArgSize
+    171				     ;Paramsstruc;Структура стека	после сохранения	BP
+Turbo Assembler	 Version 3.1	    12/28/20 02:19:23	    Page 4
+LAB6T.ASM
+
+
+
+    172				     ; SaveBP dw ? ; Сохраненное значение BP
+    173				     ; SaveIP dw ? ; Адрес	возврата
+    174				     ; LDel dw ? ; 3-й	параметр – число	удаляемых
+    175				     ; PDel dw?	; 2-й параметр	– позиция удаления
+    176				     ; StrAdr dw ? ; 1-й параметр – адрес строки
+    177				     ;Params ends
+    178	00E5  55			 push BP ;Сохранить BP
+    179	00E6  8B EC			 mov BP, SP ;Теперь BP адресует стек ПОСЛЕ сохранения BP,
+    180					 ; но	ДО сохранения остальных регистров
+    181	00E8  06 50 56 57 51		 push ES AX SI DI CX ;Сохранить все	изменяемые регистры
+    182	00ED  8C D8			 mov AX,DS ; ES	будет указывать на
+    183	00EF  8E C0			 mov ES,AX ; сегмент данных
+    184	00F1  8B 7E 08			 mov DI,__StrAdr ; Установить	в DI адрес,
+    185	00F4  03 7E 06			 add DI,__PDel ; куда надо
+    186	00F7  4F			 dec DI	; пересылать символы
+    187	00F8  8B F7			 mov SI,DI ;А в SI – адрес,
+    188	00FA  03 76 04			 add SI,__LDel ; откуда их пересылать
+    189	00FD  FC			 cld ;Продвигаться от начала строки к концу
+    190	00FE			     __REPEAT:
+    191	00FE  A4			 movsb
+    192	00FF  80 7C FF 00		 cmp byte ptr [SI-1], 0
+    193	0103  75 F9			 jne __REPEAT
+    194	0105  59 5F 5E 58 07		 pop CX	DI SI AX ES ;Восстановить все, что сохраняли
+    195	010A  5D			 pop BP
+    196	010B  C2 0006			 ret __ArgSize ;Убрать из стека 3 параметра-слова
+    197	010E			     DELSUBS endp
+    198				     end
+Turbo Assembler	 Version 3.1	    12/28/20 02:19:23	    Page 5
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "12/28/20"
+??FILENAME			  Text	 "LAB6T	  "
+??TIME				  Text	 "02:19:23"
+??VERSION			  Number 030A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB6T
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 _TEXT:0000
+@WORDSIZE			  Text	 2
+DELSUBS				  Near	 _TEXT:00E5
+LENDEL				  Word	 DGROUP:00F9
+LLL0				  Near	 _TEXT:0031
+LLL1				  Near	 _TEXT:003B
+LLL2				  Near	 _TEXT:0062
+LLL3				  Near	 _TEXT:00A6
+LLL4				  Near	 _TEXT:00AE
+MESS1				  Byte	 DGROUP:0000
+MESS2				  Byte	 DGROUP:000C
+MESS3				  Byte	 DGROUP:002E
+MESS4				  Byte	 DGROUP:0070
+MLOOP				  Near	 _TEXT:0017
+N_BUFLEN			  Byte	 DGROUP:00F2
+N_FACTLEN			  Byte	 DGROUP:00F3
+N_INPBUF			  Byte	 DGROUP:00F4
+POSDEL				  Word	 DGROUP:00F7
+QUIT				  Near	 _TEXT:00BB
+S_BUFLEN			  Byte	 DGROUP:00A0
+S_FACTLEN			  Byte	 DGROUP:00A1
+S_INPBUF			  Byte	 DGROUP:00A2
+VAL				  Near	 _TEXT:00C0
+__1				  Near	 _TEXT:00C8
+__2				  Near	 _TEXT:00E2
+__3				  Near	 _TEXT:00E3
+__ARGSIZE			  Number 0006
+__LDEL				  Number [DGROUP:BP+0004]
+__PDEL				  Number [DGROUP:BP+0006]
+__REPEAT			  Near	 _TEXT:00FE
+__STRADR			  Number [DGROUP:BP+0008]
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  00FB Word	  Public  DATA
+_TEXT				  16  010E Word	  Public  CODE
+

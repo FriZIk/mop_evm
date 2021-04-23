@@ -1,0 +1,271 @@
+Turbo Assembler	 Version 3.1	    12/29/20 03:36:27	    Page 1
+lab6.asm
+
+
+
+      1				     ;Разработать подпрограмму, которая вставляет	    +
+      2				     подстроку	в строку,
+      3				     ;начиная с	заданной позиции. Разработать	программу, +
+      4				     которая вводит с
+      5				     ;клавиатуры исходную строку, вводит подстроку и	    +
+      6				     позицию вставки,
+      7				     ;вставляет подстроку в строку.
+      8
+      9				     locals __
+     10	0000			     model small
+     11	0000			     stack 100h
+     12
+     13	0000			     dataseg
+     14				     ; Сообщения на вывод
+     15				     ;MESS1 db 0dh,0ah,"Еnter the string:",'$'
+     16	0000  0D 0A 45 6E 74 65	72+  MESS1 db 0dh,0ah,"Enter string:","$"
+     17	      20 73 74 72 69 6E	67+
+     18	      3A 24
+     19	0010  0D 0A 45 6E 74 65	72+  MESS2 db 0dh,0ah,"Enter substring:","$"
+     20	      20 73 75 62 73 74	72+
+     21	      69 6E 67 3A 24
+     22	0023  0D 0A 45 6E 74 65	72+  MESS3 db 0dh,0ah,"Enter position:","$"
+     23	      20 70 6F 73 69 74	69+
+     24	      6F 6E 3A 24
+     25	0035  0D 0A 52 65 73 75	6C+  MESS4 db 0dh,0ah,"Result:","$"
+     26	      74 3A 24
+     27
+     28				     ; Основная	строка
+     29	003F  50		     S_BUFLEN db 80 ; Макс.	длина основной строки
+     30	0040  ??		     S_FACTLEN db ? ; Длина фактически введенной основной	    +
+     31				     строки
+     32	0041  50*(??)		     S_INPBUF db 80 dup(?) ; Введенная	основная строка
+     33
+     34				     ; Подстрока
+     35	0091  14		     S_BUFLEN_SUB db 20	; Максимальная длина подстроки
+     36	0092  ??		     S_FACTLEN_SUB db ?; Фактическая	длина подстроки
+     37	0093  14*(??)		     S_INPBUF_SUB db 20	dup(?) ; Введенная подстрока
+     38	00A7  ????		     TEMP dw ? ; Переменная общего назначения
+     39				     ; Индекс вставки
+     40	00A9  03		     N_BUFLEN db 3 ; Макс. длина числа при вводе
+     41	00AA  ??		     N_FACTLEN db ? ; Фактическая длина
+     42	00AB  03*(??)		     N_INPBUF db 3 dup(?) ; Строка представления числа
+     43	00AE  ????		     POSINS dw ? ; Позиция, начиная с которой вставляем
+     44
+     45	00B0			     codeseg
+     46				     startupcode
+1    47	0000			     @Startup:
+1    48	0000  BA 0000s			     MOV     DX,@data
+1    49	0003  8E DA			     MOV     DS,DX
+1    50	0005  8C D3			     MOV     BX,SS
+1    51	0007  2B DA			     SUB     BX,DX
+1    52	0009  D1 E3 D1 E3 D1 E3	D1+	     SHL     BX,4
+     53	      E3
+1    54	0011  FA			     CLI
+1    55	0012  8E D2			     MOV     SS,DX
+1    56	0014  03 E3			     ADD     SP,BX
+1    57	0016  FB			     STI
+Turbo Assembler	 Version 3.1	    12/29/20 03:36:27	    Page 2
+lab6.asm
+
+
+
+     58
+     59				     ; Ввод	основной строки
+     60	0017  BA 0000r		     MLOOP: lea	DX, MESS1
+     61	001A  B4 09			 mov AH, 09h
+     62	001C  CD 21			 int 21h ; приглашение
+     63	001E  BA 003Fr			 lea DX,S_BUFLEN
+     64	0021  B4 0A			 mov AH, 0Ah
+     65	0023  CD 21			 int 21h ; Ввод строки
+     66	0025  8A 1E 0040r		 mov BL, S_FACTLEN
+     67	0029  80 FB 00			 cmp BL,0 ; если строка пустая,	то заканчиваем
+     68	002C  75 03			 jne LLL0 ;Нет – продолжать
+     69	002E  EB 53 90			 jmp QUIT
+     70
+     71	0031  B7 00		     LLL0: mov BH, 0
+     72					 ;Дополнить длину	до слова
+     73	0033  83 C3 02			 add BX, 2 ; и	получить адрес позиции
+     74	0036  03 DA			 add BX, DX ; сразу после конца строки
+     75	0038  C6 07 00			 mov byte ptr [BX],0 ;Записать признак конца строки
+     76
+     77				     ; Ввод	подстроки
+     78	003B  BA 0010r		     LLL1: lea DX, MESS2
+     79	003E  B4 09			 mov AH,09h
+     80	0040  CD 21			 int 21h
+     81	0042  BA 0091r			 lea DX,S_BUFLEN_SUB
+     82	0045  B4 0A			 mov AH, 0Ah
+     83	0047  CD 21			 int 21h ; Ввод строки
+     84	0049  8A 1E 0092r		 mov BL, S_FACTLEN_SUB
+     85
+     86				     ; Ввода числа
+     87	004D  BA 0023r		     LLL2: lea DX, MESS3
+     88	0050  B4 09			 mov AH, 09h
+     89	0052  CD 21			 int 21h
+     90	0054  BA 00A9r			 lea DX, N_BUFLEN
+     91	0057  B4 0A			 mov AH, 0Ah
+     92	0059  CD 21			 int 21h ;Ввод строки	числа
+     93	005B  BB 00ABr			 lea BX, N_INPBUF ;Адрес строки представления числа
+     94	005E  8A 0E 00AAr		 mov CL, N_FACTLEN;Длина этой строки
+     95
+     96	0062  E8 0063			 call TO_NUM; Вызов функции	перевода в число
+     97
+     98					 ; Обрабатываем "нештатные" ситуации
+     99	0065  72 D4			 jc LLL1 ; Ошибка? Повторить ввод
+    100	0067  3C 00			 cmp AL, 0 ;Ноль?
+    101	0069  74 D0			 je LLL1
+    102	006B  3A 06 0040r		 cmp AL, S_FACTLEN;Превышает длину строки?
+    103	006F  7F CA			 jg LLL1
+    104
+    105	0071  8A 1E 0040r		 mov BL, S_FACTLEN
+    106	0075  2A D8			 SUB BL, AL
+    107	0077  83 C3 01			 add BX, 1h
+    108	007A  89 1E 00AEr		 mov POSINS, BX	;Запомнить позицию удаления
+    109				     ; Вывод строки
+    110	007E			     LLL3:
+    111	007E  E8 0007			 call PRINT
+    112	0081  EB 94			 jmp MLOOP
+    113	0083			     QUIT:
+    114					 exitcode 0;
+Turbo Assembler	 Version 3.1	    12/29/20 03:36:27	    Page 3
+lab6.asm
+
+
+
+1   115	0083  B8 4C00			     MOV     AX,04C00h
+1   116	0086  CD 21			     INT     21h
+    117
+    118
+    119				     ; Подпрограмма	вывода результата
+    120	0088			     PRINT proc	near
+    121	0088				 _1: ; Выводим сообщение result:
+    122	0088  BA 0035r			     lea DX, MESS4
+    123	008B  B4 09			     mov AH, 09h
+    124	008D  CD 21			     int 21h
+    125	008F  BB 0041r			     lea BX, S_INPBUF
+    126	0092  8A 0E 0040r		     mov Cl, S_FACTLEN
+    127	0096				 _2: ; Выводим первую строку	до индекса вставки
+    128	0096  8B 17			     mov DX, [BX]
+    129	0098  3B 0E 00AEr		     cmp CX,POSINS
+    130	009C  74 09			     je	_3
+    131	009E  B4 02			     mov AH, 02h
+    132	00A0  CD 21			     int 21h
+    133	00A2  43			     inc BX
+    134	00A3  8B 17			     mov DX,[BX] ; тест
+    135	00A5  E2 EF			     loop _2
+    136	00A7				 _3: ; Подготовка к выводу подстроки
+    137	00A7  83 F9 00			     cmp CX,0
+    138	00AA  74 17			     je	_6
+    139	00AC  49			     dec CX
+    140	00AD  51 53			     push CX BX
+    141	00AF  BB 0093r			     lea BX, S_INPBUF_SUB
+    142	00B2  8A 0E 0092r		     mov Cl, S_FACTLEN_SUB
+    143	00B6				 _4: ; Вывод подстроки
+    144	00B6  8B 17			     mov DX, [BX]
+    145	00B8  B4 02			     mov AH, 02h
+    146	00BA  CD 21			     int 21h
+    147	00BC  43			     inc BX
+    148	00BD  E2 F7			     loop _4
+    149	00BF				 _5: ; Вытаскиваем данные из	стека
+    150	00BF  5B 59			     pop BX CX
+    151	00C1  EB D3			     jmp _2
+    152	00C3				 _6: ; Возвращаемся	в основу
+    153	00C3  B4 02			     mov AH, 02h
+    154	00C5  CD 21			     int 21h
+    155	00C7  C3			     ret
+    156	00C8			     endp PRINT
+    157
+    158				     ; Подпрограмма	перевода в число
+    159	00C8			     TO_NUM proc near
+    160	00C8  52		     push DX ;Сохранить все	изменяемые регистры,
+    161				     ; кроме AX, в котором	результат
+    162	00C9  B5 00		     mov CH, 0 ;Расширяем длину до слова
+    163	00CB  B8 0000		     mov AX, 0 ;Начальное значение результата
+    164	00CE  B2 0A		     mov DL, 10	;Основание системы счисления
+    165	00D0  F6 EA		     __1: imul DL ;Умножить на основание
+    166	00D2  72 16			 jc __2	;Переполнение байта?
+    167	00D4  8A 37			 mov DH, [BX] ;Очередная цифра
+    168	00D6  80 EE 30			 sub DH, '0' ;Получить значение	цифры
+    169	00D9  7C 0F			 jl __2	;Это	была не цифра!
+    170	00DB  80 FE 09			 cmp DH, 9
+    171	00DE  7F 0A			 jg __2	;Это	опять же	была не цифра!
+Turbo Assembler	 Version 3.1	    12/29/20 03:36:27	    Page 4
+lab6.asm
+
+
+
+    172	00E0  02 C6			 add AL, DH ;+ значение	цифры к результату
+    173	00E2  72 06			 jc __2	;Переполнение байта?
+    174	00E4  43			 inc BX	;Сдвиг по строке
+    175	00E5  E2 E9			 loop __1 ;Цикл по строке
+    176	00E7  EB 02 90			 jmp __3 ;Нормальное число
+    177	00EA  F9		     __2: stc ;Было	переполнение – устанавливаем	CF
+    178	00EB  5A		     __3: pop DX ;Восстановить все, что сохраняли
+    179	00EC  C3			 ret
+    180	00ED			     TO_NUM endp
+    181				     end
+Turbo Assembler	 Version 3.1	    12/29/20 03:36:27	    Page 5
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "12/29/20"
+??FILENAME			  Text	 "lab6	  "
+??TIME				  Text	 "03:36:27"
+??VERSION			  Number 030A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB6
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 _TEXT:0000
+@WORDSIZE			  Text	 2
+LLL0				  Near	 _TEXT:0031
+LLL1				  Near	 _TEXT:003B
+LLL2				  Near	 _TEXT:004D
+LLL3				  Near	 _TEXT:007E
+MESS1				  Byte	 DGROUP:0000
+MESS2				  Byte	 DGROUP:0010
+MESS3				  Byte	 DGROUP:0023
+MESS4				  Byte	 DGROUP:0035
+MLOOP				  Near	 _TEXT:0017
+N_BUFLEN			  Byte	 DGROUP:00A9
+N_FACTLEN			  Byte	 DGROUP:00AA
+N_INPBUF			  Byte	 DGROUP:00AB
+POSINS				  Word	 DGROUP:00AE
+PRINT				  Near	 _TEXT:0088
+QUIT				  Near	 _TEXT:0083
+S_BUFLEN			  Byte	 DGROUP:003F
+S_BUFLEN_SUB			  Byte	 DGROUP:0091
+S_FACTLEN			  Byte	 DGROUP:0040
+S_FACTLEN_SUB			  Byte	 DGROUP:0092
+S_INPBUF			  Byte	 DGROUP:0041
+S_INPBUF_SUB			  Byte	 DGROUP:0093
+TEMP				  Word	 DGROUP:00A7
+TO_NUM				  Near	 _TEXT:00C8
+_1				  Near	 _TEXT:0088
+_2				  Near	 _TEXT:0096
+_3				  Near	 _TEXT:00A7
+_4				  Near	 _TEXT:00B6
+_5				  Near	 _TEXT:00BF
+_6				  Near	 _TEXT:00C3
+__1				  Near	 _TEXT:00D0
+__2				  Near	 _TEXT:00EA
+__3				  Near	 _TEXT:00EB
+Turbo Assembler	 Version 3.1	    12/29/20 03:36:27	    Page 6
+Symbol Table
+
+
+
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  00B0 Word	  Public  DATA
+_TEXT				  16  00ED Word	  Public  CODE
+
