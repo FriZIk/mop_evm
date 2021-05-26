@@ -1,0 +1,80 @@
+<!DOCTYPE HTML><html>
+    
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <style>
+        html {
+            font-family: Arial;
+            display: inline-block;
+            margin: 0px auto;
+            text-align: center;
+        }
+        h2 { font-size: 3.0rem; }
+        p { font-size: 3.0rem; }
+        .units { font-size: 1.2rem; }
+        .dht-labels{
+            font-size: 1.5rem;
+            vertical-align:middle;
+            padding-bottom: 15px;
+        }
+        </style>
+    </head>
+
+    <body bgcolor="#a0c0c0">
+        <h2>Охранная система</h2>
+        <p>
+            <!-- <i class="fas fa-shield-check" style="color:#FFD700;"></i> -->
+            <i class="fas fa-shield-alt" style="color:#808000;""></i>
+            <!-- style="color:#FFD700; -->
+            <span class="dht-labels">Статус охраны</span>
+            <span id="security_status">%SECURITY_STATUS%</span>
+            <!-- <sup class="units">%</sup> -->
+        </p>
+        <p>
+            <i class="fas fa-compress-arrows-alt" style="color:#FF00FF;"></i>
+            <span class="dht-labels">Движение</span>
+            <span id="movement">%MOVEMENT%</span>
+            <!-- <sup class="units">&deg;C</sup> -->
+        </p>
+        <p>
+            <i class="fas fa-id-card" style="color:#00add6;"></i>
+            <span class="dht-labels">Карта RFID</span>
+            <span id="rfid_card">%RFID_CARD%</span>
+            <!-- <sup class="units">%</sup> -->
+        </p>
+    </body>
+
+    <script>
+        setInterval(function ( ) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("security_status").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "/security_status", true);
+            xhttp.send();
+        }, 10000 ) ;
+        setInterval(function ( ) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("movement").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "/movement", true);
+            xhttp.send();
+        }, 10000 ) ;
+        setInterval(function ( ) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("rfid_card").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "/rfid_card", true);
+            xhttp.send();
+        }, 10000 ) ;
+    </script>
+</html>

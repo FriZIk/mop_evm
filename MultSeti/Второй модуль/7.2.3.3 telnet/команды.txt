@@ -1,0 +1,7 @@
+enable
+conf t
+access-list 99 permit host 10.0.0.1
+line vty 0 15
+access-class 99 in
+show access-lists
+show run

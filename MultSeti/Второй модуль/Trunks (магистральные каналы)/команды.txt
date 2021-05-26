@@ -1,0 +1,50 @@
+Проверка настроек текущих сетей vlan
+	show vlan
+Настройка интерфейсов G0/1 G0/2:
+1. enable
+2. conf t
+3. interface g0/1
+4. switchport mode trunk
+5. exit
+6. interface g0/2
+7. switchport mode trunk
+7. exit
+8. vlan 99
+9. name vlan99
+10. 
+
+Часть 1
+S1/S2/S3
+1. enable
+2. show vlan brief
+
+Проверка свзяи PC1 PC4
+ping 172.17.10.24 Сначала не работает
+
+Часть 2
+S1
+enable
+conf t
+interface range g0/1 -2
+switchport mode trunk
+switchport trunk native vlan 99
+exit
+
+S2
+enable
+conf t
+interface range g0/1 -2
+switchport mode trunk
+switchport trunk native vlan 99
+exit
+
+S3 
+enable 
+conf t
+interface range g0/1 -2
+switchport mode trunk
+switchport trunk native vlan 99
+exit
+ 
+Повторный пинг
+ping 192.168.10.24

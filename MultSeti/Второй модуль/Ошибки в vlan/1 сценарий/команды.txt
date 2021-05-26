@@ -1,0 +1,53 @@
+Проверка конфигруации VLAN
+1. S1/S2/S3
+2. enable 
+3. show vlan brief
+
+Перенастройка S1
+1. enable
+2. conf t
+3. interface f0/11
+4. switchport mode access  
+5  switchport access vlan 10
+6. interface f0/18
+7. switchport mode access
+8. switchport access vlan 20
+9. interface f0/6
+10. switchport mode access
+11. switchport access vlan 30
+12  interface g0/1
+13. switchport mode trunk
+14. switchport trunk native vlan 99
+15. end
+16. write
+
+Перенастройка S2
+1. enable
+2. conf t
+3. interface f0/11
+4. no switchport access vlan 30
+5. switchport mode access
+6. switchport access vlan 10
+7. interface g0/1
+8. switchport mode trunk
+9. switchport trunk native vlan 99
+10. end
+
+Перенастройка S3
+1. enable
+2. conf t
+3. interface f0/6
+4. no switchport access vlan 20
+5. switchport mode access
+6. switchport access vlan 30
+7. interface f0/18
+8. no switchport access vlan 30
+9. switchport mode access
+10. switchport access vlan 20
+11. exit 
+
+Пинги
+1. Переключить PC5 к F0/18
+2. Проверка ip адрессов PC1,2,3,4,5 и на 6 будет ошибка, надо править
+3. Дальше всё пингуем просто и всё
+4. Какой-то замес
