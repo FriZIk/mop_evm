@@ -1,0 +1,32 @@
+# Ошибки
+1. свич 2 гиг 1 не настроен магистральный канал
+2. свич 1 не настроены вланы
+3. свич 3 порты не подписаны к влану
+4. магистральный кнал свича 1 не настроен на влан по умолчанию
+
+
+# ЭС 1
+vlan 56
+name "Managment&Native"
+vlan 30
+Name "Guest"
+vlan 10
+name "Faculty/staff"
+vlan 20
+name "Student"
+int range g0/1-2
+switchport trunk native vlan 56
+
+# ЭС 2
+int g0/1
+switchport mode trunk
+
+# ЭС 3
+int range fa0/1-5
+switchport access vlan 56
+int range fa0/6-10
+switchport access vlan 30
+int range fa0/11-17
+switchport access vlan 10
+int range fa0/18-24
+switchport access vlan 20
